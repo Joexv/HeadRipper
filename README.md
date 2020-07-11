@@ -15,6 +15,11 @@ This Bearer ID is unique to each account, and can easily be pulled by signing in
 and using web dev tools to view any JSON request sent to the server.
 Without this authentication you cannot use the program period. It just won't work.
 
+Currently, the program is contained in a single form, with a very basic audio player built in for ease of testing and checking media you download.
+
+Headspace appears to change what voice/audio file Sleepcasts use on a daily basis. You can identify which audio you will get based on the Session ID.
+Some Wind Downs have multiple variations to their audio based on length of time, and narrator. These can be selected via a drop down box. Currently they are labeled as just a numerical ID, in the future these will idealy be labeled properly with narrator information and length of the audio.
+
 # Disclaimer
 By making this program I am not promoting piracy or stealing of content from Headspace. 
 They truely believe in what they create and that should be supported for making a service that helps
