@@ -38,7 +38,12 @@ namespace HeadRipper
 
         private void button4_Click(object sender, EventArgs e)
         {
-            comboBox1.DataSource = hsAPI.ParseCategories();
+           comboBox1.DataSource = hsAPI.ParseCategories();
+           if(comboBox1.Items.Count > 0)
+           {
+                button1.Enabled = true;
+                button5.Enabled = true;
+           }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,6 +95,9 @@ namespace HeadRipper
                     ParseSleepcast();
                     break;
                 case 1:
+                case 3:
+                case 4:
+                case 5:
                     ParseWindDown();
                     break;
                 case 2:
@@ -97,6 +105,50 @@ namespace HeadRipper
                     break;
                 default:
                     ParseWindDown();
+                    break;
+            }
+
+            Application.DoEvents();
+
+            string variation = $"{title.Text.Replace(" ", "_")}_{variations.Text}.aac";
+            string media = $"{title.Text.Replace(" ", "_")}_{mediaId.Text}.aac";
+            string mixed = $"{title.Text.Replace(" ", "_")}_mixed_{sessionId.Text}.mp3";
+            bool Exists = false;
+
+            Exists = (File.Exists(variation) && variations.Text != "NA" && variations.Text != string.Empty);
+            Exists = (File.Exists(media) || File.Exists(mixed));
+
+            ParseNotes();
+
+            //Will hopefully default to the first real variation rather than NA
+            if(variations.Items.Count > 1)
+                variations.SelectedIndex = 1;
+        }
+
+        private void ParseNotes()
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    notes.Text = "Sleepcasts normally run about 45 minutes. Each consists of two audio files, the voice over, and some background noise. When downloaded using Headripper they are merged on the fly into a single mp3 in order to reduce size, and allow you to use any audio player you would like. Sleepcasts are normally changed on a 24 hour cycle.";
+                    break;
+                case 1:
+                    notes.Text = "Wind Downs come in many different sizes and voice overs. These are all available in the variations drop down. Sadly at the moment they aren't differited and can currently only be identified as their ID. Wind Downs are downloaded as aac files.";
+                    break;
+                case 2:
+                    notes.Text = "Nighttime SOS are short audio clips normally with a single voice over. They are downloaded as aac files.";
+                    break;
+                case 3:
+                    notes.Text = "Sleep music can be upwards of an hour. Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sleepmusic is downloaded as aac files.";
+                    break;
+                case 4:
+                    notes.Text = "Sound scapes can range from 45 minutes to several hours. Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sound scapes are downloaded as aac files. Some sound scapes the primary media is the audio that is recommended to download. Some variations appear to have voice overs which is unusual for sound scapes.";
+                    break;
+                case 5:
+                    notes.Text = "Sleep radio is 500 minutes long. Roughly 1GB each! Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sleep radios are download as aac files.";
+                    break;
+                default:
+                    notes.Text = "No notes";
                     break;
             }
         }
@@ -118,6 +170,8 @@ namespace HeadRipper
             mediaId.Text = "";
             sessionId.Text = "";
             variations.DataSource = null;
+            button2.Enabled = false;
+            button3.Enabled = false;
         }
 
         private void ParseSleepcast()
@@ -252,7 +306,7 @@ namespace HeadRipper
         private string Download_WindDown()
         {
             //Download using Variations ID
-            if(variations.Text != "NA" || variations.Text != string.Empty)
+            if(variations.Text != "NA" && variations.Text != string.Empty)
             {
                 return hsAPI.Download(variations.Text, title.Text.Replace(" ", "_"));
             }
@@ -272,13 +326,19 @@ namespace HeadRipper
                 switch (comboBox1.SelectedIndex)
                 {
                     case 0:
-                    case 1:
+                    case 2:
+                        //Sleepcast and SOS
                         DownloadName = Download_SleepCast_SOS();
                         break;
-                    case 2:
+                    case 1:
+                    case 3:
+                    case 4:
+                    case 5:
+                        //Wind Down, Sleepmusic, Soundscape, Sleep Radio
                         DownloadName = Download_WindDown();
                         break;
                 }
+
 
                 if (File.Exists(DownloadName))
                 {
@@ -296,26 +356,48 @@ namespace HeadRipper
         //Download All Visible
         private void button5_Click(object sender, EventArgs e)
         {
-            switch (comboBox1.SelectedIndex)
+            foreach (Media.Attributes Matt in hsAPI.ParseMedia(comboBox1.Text))
             {
-                case 0:
-                    foreach (Media.Attributes Matt in hsAPI.ParseMedia(comboBox1.Text))
-                    {
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        //Sleepcast
                         try
                         {
                             SleepcastContent.Attributes SA = hsAPI.ParseContent("sleepcasts", Matt.entityId.ToString());
-
-                            if (!File.Exists($"{Matt.title.Replace(" ", "_")}_mixed_{SA.dailySession.episodeId}.mp3"))
+                            if (!File.Exists($"{Matt.title.Replace(" ", "_")}_mixed_{SA.dailySession.episodeId}.mp3") && Matt.title != string.Empty)
                                 hsAPI.Download(SA.dailySession.primaryMediaId.ToString(), SA.dailySession.secondaryMediaId.ToString(),
                                     Matt.title.Replace(" ", "_"), SA.dailySession.episodeId.ToString());
                         }
                         catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-                    }
-                    break;
-                default:
-                    break;
-            }
-                
+                        break;
+                    case 1:
+                    case 3:
+                        //Wind Down & Sleep Music
+                        try
+                        {
+                            List<String> IDs = hsAPI.ParseWindDown(Matt.entityId.ToString());
+                            foreach (string ID in IDs)
+                            {
+                                if (!File.Exists($"{Matt.title}_{ID}.aac") && ID != "NA" && ID != string.Empty)
+                                    hsAPI.Download(ID, Matt.title.Replace(" ", "_"));
+                            }
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        break;
+                    case 2:
+                        //SOS
+                        try
+                        {
+                            if (!File.Exists($"{Matt.title}_{Matt.contentId}.aac"))
+                                    hsAPI.Download(Matt.contentId.ToString(), Matt.title.Replace(" ", "_"));
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        break;
+                    default:
+                        break;
+                }
+            }  
         }
 
         private void label6_Click(object sender, EventArgs e)

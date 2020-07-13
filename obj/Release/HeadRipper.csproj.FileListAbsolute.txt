@@ -1,0 +1,12 @@
+G:\HeadRipper\ffmpeg.exe
+G:\HeadRipper\HeadRipper.exe.config
+G:\HeadRipper\HeadRipper.exe
+G:\HeadRipper\HeadRipper.pdb
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.csprojAssemblyReference.cache
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.Form1.resources
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.Properties.Resources.resources
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.csproj.GenerateResource.cache
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.csproj.CoreCompileInputs.cache
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.csproj.CopyComplete
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.exe
+C:\Users\FrontPC\source\repos\HeadRipper\HeadRipper\obj\Release\HeadRipper.pdb

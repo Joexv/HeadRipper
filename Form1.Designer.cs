@@ -66,6 +66,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.variations = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.notes = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +113,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(12, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 49);
@@ -143,6 +146,7 @@
             // 
             // button5
             // 
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(12, 363);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(151, 49);
@@ -399,11 +403,30 @@
             this.label13.TabIndex = 42;
             this.label13.Text = "Variations";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(827, 426);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(38, 13);
+            this.label14.TabIndex = 43;
+            this.label14.Text = "Notes:";
+            // 
+            // notes
+            // 
+            this.notes.Location = new System.Drawing.Point(830, 445);
+            this.notes.Multiline = true;
+            this.notes.Name = "notes";
+            this.notes.Size = new System.Drawing.Size(477, 69);
+            this.notes.TabIndex = 44;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1322, 784);
+            this.Controls.Add(this.notes);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.variations);
             this.Controls.Add(this.label12);
@@ -491,6 +514,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox variations;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox notes;
     }
 }
 
