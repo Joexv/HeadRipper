@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -68,16 +69,17 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.notes = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 13);
+            this.button4.Location = new System.Drawing.Point(12, 38);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(151, 49);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Load Catagories";
+            this.button4.Text = "Load Categories";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -105,7 +107,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(170, 13);
+            this.comboBox1.Location = new System.Drawing.Point(171, 14);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(182, 21);
             this.comboBox1.TabIndex = 8;
@@ -114,7 +116,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(12, 68);
+            this.button1.Location = new System.Drawing.Point(12, 95);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 49);
             this.button1.TabIndex = 9;
@@ -420,11 +422,23 @@
             this.notes.Size = new System.Drawing.Size(477, 69);
             this.notes.TabIndex = 44;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 147);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(136, 156);
+            this.label15.TabIndex = 45;
+            this.label15.Text = "Step 1:\r\nLoad categories from \r\nHeadspace\r\n\r\nStep2:\r\nSelect category from \r\nthe d" +
+    "rop down box\r\n\r\nStep 3:\r\nLoad Medias\r\nThen, select the audio you \r\nwant to downl" +
+    "oad or rip all\r\n";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1322, 784);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.notes);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -465,6 +479,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "HeadRipper";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -516,6 +531,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox notes;
+        private System.Windows.Forms.Label label15;
     }
 }
 

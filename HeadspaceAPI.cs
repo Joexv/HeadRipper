@@ -182,7 +182,8 @@ namespace HeadRipper
             Console.WriteLine(Response);
             foreach (Media.Included included in MediaRoot.included)
             {
-                medias.Add(included.attributes);
+                if(included.attributes.title != string.Empty && included.attributes.entityId != 0)
+                    medias.Add(included.attributes);
             }
             return medias.ToArray();
         }

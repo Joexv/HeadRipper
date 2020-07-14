@@ -48,13 +48,13 @@ namespace HeadRipper
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            ParseNotes();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = hsAPI.ParseMedia(comboBox1.Text);
-
+            ClearMedia();
             //Hide useless columns
             Hide("id");
             Hide("i18nSrcTitle");
@@ -117,8 +117,6 @@ namespace HeadRipper
 
             Exists = (File.Exists(variation) && variations.Text != "NA" && variations.Text != string.Empty);
             Exists = (File.Exists(media) || File.Exists(mixed));
-
-            ParseNotes();
 
             //Will hopefully default to the first real variation rather than NA
             if(variations.Items.Count > 1)
