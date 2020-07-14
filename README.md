@@ -31,6 +31,6 @@ In order to get your BearerID for authenticating with the headspace server follo
 
 2: Open up the network traffic view (In FireFox this is CRTL-Shift-E)
 
-3: Find and GET method that has the url api.prod.headspace.com
+3: Find any GET method that has the url api.prod.headspace.com
 
 4: Under the Request Headers table on the right hand side of the network sniffer find 'Authentication' and next to it you should see bearer and then a very long line of numbers and letters. Those numbers and letters are your BearerID. Simply copy and paste that into the corisponding box in HeadRipper and you're set!
