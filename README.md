@@ -6,9 +6,8 @@ I'm not an a Headspace user, but I was dissapointed that you could not use a PC 
 This program will allow me to bring access to those who want to try Headspace but either don't have a mobile device or don't have access to their device during the night.
 
 # Features
-Currently supports Sleepcasts, Wind Downs and Night SOS almost fully. Sleepcasts, voice and background are mixed using FFMPEG into a single MP3.
+Currently supports all 'Night' audio. Regular meditation and relaxation audios to be supported in the future. Sleepcasts, voice and background are mixed using FFMPEG into a single MP3.
 All other media is downloaded as AAC files.
-Other forms of media are currently untested, nut in theory are working as most of Headspace uses the same general format for their api.
 Audio is pulled using Headspace official servers using an official Headspace paid account.
 You CANNOT use this program for piracy as it requires a working current Bearer ID to authenticate with the server.
 This Bearer ID is unique to each account, and can easily be pulled by signing into Headspace on your web browser 
