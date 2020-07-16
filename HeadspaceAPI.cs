@@ -42,6 +42,10 @@ namespace HeadRipper
 
         //Get non sleepcast data - very basic data, looks like its sole purpose is to display how big a download will be
         //https://api.prod.headspace.com/content-aggregation/v1/content/view-models/content-info/modules?contentId={0}&moduleType=DOWNLOAD_CONTENT&tag=
+       
+        //Get Skeleton Response for certain media. Notably used to get the 'animationMediaId' for the techniques and singles Meditation category
+        //Root-Attributes-animationMediaId - Video file ID use with Content View v2 to get information abou the video stored on AmazonAWS server or download it as a m3u8 file
+        //https://api.prod.headspace.com/content-aggredgation/v1/content/view-models/content-info/skeleton?contentId={0}&tag=
         public string Download(string MediaId, string Name)
         {
             if (!File.Exists($"{Name}_{MediaId}.aac"))
@@ -148,7 +152,11 @@ namespace HeadRipper
 
         public void stop()
         {
-            outputDevice.Stop();
+            try
+            {
+                outputDevice.Stop();
+            }
+            catch { }
         }
 
         private void OnPlaybackStopped(object sender, StoppedEventArgs args)
@@ -159,10 +167,10 @@ namespace HeadRipper
             audioFile = null;
         }
 
-        public string[] ParseCategories()
+        public string[] ParseCategories(string Category)
         {
             List<String> categories = new List<String>();
-            Categories.Root SleepCat = JsonConvert.DeserializeObject<Categories.Root>(GET(@"https://api.prod.headspace.com/content/view-models/library/topics-menu?location=SLEEP"));
+            Categories.Root SleepCat = JsonConvert.DeserializeObject<Categories.Root>(GET(@"https://api.prod.headspace.com/content/view-models/library/topics-menu?location={1}".Replace("{1}", Category)));
             foreach (Categories.Datum datum in SleepCat.data)
             {
                 categories.Add(datum.attributes.name + "|" + datum.attributes.location + "|" + datum.attributes.id);
@@ -186,6 +194,16 @@ namespace HeadRipper
                     medias.Add(included.attributes);
             }
             return medias.ToArray();
+        }
+
+        //Used to get the video Id for Techniques and singles
+        public string ParseAnimationId(string ContentId)
+        {
+            string URL = @"https://api.prod.headspace.com/content-aggregation/v1/content/view-models/content-info/skeleton?contentId={0}&tag=";
+            URL = URL.Replace("{0}", ContentId);
+            string Response = GET(URL);
+            techniqueMedia.Root TRoot = JsonConvert.DeserializeObject<techniqueMedia.Root>(Response);
+            return TRoot.data.attributes.animationMediaId;
         }
 
         public SleepcastContent.Attributes ParseContent(string Category, string EntityId)

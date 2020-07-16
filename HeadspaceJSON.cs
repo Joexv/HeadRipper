@@ -41,6 +41,73 @@ namespace HeadRipper
         }
     }
 
+    public class techniqueMedia
+    {
+        public class Attributes
+        {
+            public string moduleType { get; set; }
+            public object itemCount { get; set; }
+            public int ordinalNumber { get; set; }
+            public int contentId { get; set; }
+            public string entityId { get; set; }
+
+        }
+
+        public class Included
+        {
+            public string type { get; set; }
+            public string id { get; set; }
+            public Attributes attributes { get; set; }
+
+        }
+
+        public class Attributes2
+        {
+            public int contentId { get; set; }
+            public string contentType { get; set; }
+            public string entityId { get; set; }
+            public bool subscriberContent { get; set; }
+            public string animationMediaId { get; set; }
+
+        }
+
+        public class Datum
+        {
+            public string type { get; set; }
+            public string id { get; set; }
+
+        }
+
+        public class ContentInfoModuleDescriptor
+        {
+            public List<Datum> data { get; set; }
+
+        }
+
+        public class Relationships
+        {
+            public ContentInfoModuleDescriptor contentInfoModuleDescriptor { get; set; }
+
+        }
+
+        public class Data
+        {
+            public string type { get; set; }
+            public string id { get; set; }
+            public Attributes2 attributes { get; set; }
+            public Relationships relationships { get; set; }
+
+        }
+
+        public class Root
+        {
+            public List<Included> included { get; set; }
+            public Data data { get; set; }
+
+        }
+
+    }
+
     class Media
     {
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
@@ -67,7 +134,7 @@ namespace HeadRipper
             public string primaryColor { get; set; }
             public string secondaryColor { get; set; }
             public string tertiaryColor { get; set; }
-            public int patternMediaId { get; set; }
+            public int? patternMediaId { get; set; }
             public string contentInfoScreenTheme { get; set; }
             public string name { get; set; }
             public string categoryType { get; set; }

@@ -70,12 +70,16 @@
             this.label14 = new System.Windows.Forms.Label();
             this.notes = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.meditate = new System.Windows.Forms.RadioButton();
+            this.sleep = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 38);
+            this.button4.Location = new System.Drawing.Point(12, 85);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(151, 49);
             this.button4.TabIndex = 3;
@@ -85,15 +89,20 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(171, 40);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(1136, 372);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // textBox1
             // 
@@ -116,7 +125,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(12, 95);
+            this.button1.Location = new System.Drawing.Point(12, 140);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 49);
             this.button1.TabIndex = 9;
@@ -149,7 +158,7 @@
             // button5
             // 
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(12, 363);
+            this.button5.Location = new System.Drawing.Point(12, 423);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(151, 49);
             this.button5.TabIndex = 12;
@@ -416,6 +425,7 @@
             // 
             // notes
             // 
+            this.notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notes.Location = new System.Drawing.Point(830, 445);
             this.notes.Multiline = true;
             this.notes.Name = "notes";
@@ -425,7 +435,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 147);
+            this.label15.Location = new System.Drawing.Point(12, 207);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(136, 156);
             this.label15.TabIndex = 45;
@@ -433,11 +443,46 @@
     "rop down box\r\n\r\nStep 3:\r\nLoad Medias\r\nThen, select the audio you \r\nwant to downl" +
     "oad or rip all\r\n";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.sleep);
+            this.groupBox1.Controls.Add(this.meditate);
+            this.groupBox1.Location = new System.Drawing.Point(12, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(151, 66);
+            this.groupBox1.TabIndex = 46;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Category Type";
+            // 
+            // meditate
+            // 
+            this.meditate.AutoSize = true;
+            this.meditate.Checked = true;
+            this.meditate.Location = new System.Drawing.Point(7, 20);
+            this.meditate.Name = "meditate";
+            this.meditate.Size = new System.Drawing.Size(66, 17);
+            this.meditate.TabIndex = 0;
+            this.meditate.TabStop = true;
+            this.meditate.Text = "Meditate";
+            this.meditate.UseVisualStyleBackColor = true;
+            // 
+            // sleep
+            // 
+            this.sleep.AutoSize = true;
+            this.sleep.Location = new System.Drawing.Point(7, 43);
+            this.sleep.Name = "sleep";
+            this.sleep.Size = new System.Drawing.Size(52, 17);
+            this.sleep.TabIndex = 1;
+            this.sleep.Text = "Sleep";
+            this.sleep.UseVisualStyleBackColor = true;
+            this.sleep.CheckedChanged += new System.EventHandler(this.sleep_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1322, 784);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.notes);
             this.Controls.Add(this.label14);
@@ -484,6 +529,8 @@
             this.Text = "HeadRipper";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -532,6 +579,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox notes;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton sleep;
+        private System.Windows.Forms.RadioButton meditate;
     }
 }
 

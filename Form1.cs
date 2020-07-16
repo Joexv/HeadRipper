@@ -25,24 +25,25 @@ namespace HeadRipper
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = ps.Default.BearerID;
+            if (File.Exists("Bearer.txt"))
+                textBox1.Text = File.ReadAllText("Bearer.txt");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            ps.Default.BearerID = textBox1.Text;
-            ps.Default.Save();
+            File.WriteAllText("Bearer.txt", textBox1.Text);
         }
 
         public string BearerBox { get; set; }
 
         private void button4_Click(object sender, EventArgs e)
         {
-           comboBox1.DataSource = hsAPI.ParseCategories();
+            string Category = meditate.Checked ? "MEDITATE" : "SLEEP";
+           comboBox1.DataSource = hsAPI.ParseCategories(Category);
            if(comboBox1.Items.Count > 0)
            {
                 button1.Enabled = true;
-                button5.Enabled = true;
+                button5.Enabled = sleep.Checked;
            }
         }
 
@@ -89,24 +90,36 @@ namespace HeadRipper
         {
             ClearMedia();
             //this.custTableView.Rows[this.custTableView.CurrentRow.Index].Cells["ID"].Value
-            switch (comboBox1.SelectedIndex)
+            if (sleep.Checked)
             {
-                case 0:
-                    ParseSleepcast();
-                    break;
-                case 1:
-                case 3:
-                case 4:
-                case 5:
-                    ParseWindDown();
-                    break;
-                case 2:
-                    ParseSOS();
-                    break;
-                default:
-                    ParseWindDown();
-                    break;
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        ParseDefinitive();
+                        break;
+                    case 2:
+                        ParseSOS();
+                        break;
+                    default:
+                        ParseVarious();
+                        break;
+                }
             }
+            else
+            {
+                switch (comboBox1.SelectedIndex)
+                {
+                    default:
+                        ParseVarious();
+                        break;
+                    case 1:
+                    case 3:
+                        ParseOddities();
+                        break;
+                }
+                
+            }
+            
 
             Application.DoEvents();
 
@@ -119,36 +132,61 @@ namespace HeadRipper
             Exists = (File.Exists(media) || File.Exists(mixed));
 
             //Will hopefully default to the first real variation rather than NA
-            if(variations.Items.Count > 1)
+            if(variations.Items.Count > 2)
                 variations.SelectedIndex = 1;
         }
 
         private void ParseNotes()
         {
-            switch (comboBox1.SelectedIndex)
+            if (sleep.Checked)
             {
-                case 0:
-                    notes.Text = "Sleepcasts normally run about 45 minutes. Each consists of two audio files, the voice over, and some background noise. When downloaded using Headripper they are merged on the fly into a single mp3 in order to reduce size, and allow you to use any audio player you would like. Sleepcasts are normally changed on a 24 hour cycle.";
-                    break;
-                case 1:
-                    notes.Text = "Wind Downs come in many different sizes and voice overs. These are all available in the variations drop down. Sadly at the moment they aren't differited and can currently only be identified as their ID. Wind Downs are downloaded as aac files.";
-                    break;
-                case 2:
-                    notes.Text = "Nighttime SOS are short audio clips normally with a single voice over. They are downloaded as aac files.";
-                    break;
-                case 3:
-                    notes.Text = "Sleep music can be upwards of an hour. Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sleepmusic is downloaded as aac files.";
-                    break;
-                case 4:
-                    notes.Text = "Sound scapes can range from 45 minutes to several hours. Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sound scapes are downloaded as aac files. Some sound scapes the primary media is the audio that is recommended to download. Some variations appear to have voice overs which is unusual for sound scapes.";
-                    break;
-                case 5:
-                    notes.Text = "Sleep radio is 500 minutes long. Roughly 1GB each! Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sleep radios are download as aac files.";
-                    break;
-                default:
-                    notes.Text = "No notes";
-                    break;
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        notes.Text = "Sleepcasts normally run about 45 minutes. Each consists of two audio files, the voice over, and some background noise. When downloaded using Headripper they are merged on the fly into a single mp3 in order to reduce size, and allow you to use any audio player you would like. Sleepcasts are normally changed on a 24 hour cycle.";
+                        break;
+                    case 1:
+                        notes.Text = "Wind Downs come in many different sizes and voice overs. These are all available in the variations drop down. Sadly at the moment they aren't differited and can currently only be identified as their ID. Wind Downs are downloaded as aac files.";
+                        break;
+                    case 2:
+                        notes.Text = "Nighttime SOS are short audio clips normally with a single voice over. They are downloaded as aac files.";
+                        break;
+                    case 3:
+                        notes.Text = "Sleep music can be upwards of an hour. Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sleepmusic is downloaded as aac files.";
+                        break;
+                    case 4:
+                        notes.Text = "Sound scapes can range from 45 minutes to several hours. Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sound scapes are downloaded as aac files. Some sound scapes the primary media is the audio that is recommended to download. Some variations appear to have voice overs which is unusual for sound scapes.";
+                        break;
+                    case 5:
+                        notes.Text = "Sleep radio is 500 minutes long. Roughly 1GB each! Be warned when downloading that RAM usage will spike heavily! The built in garbage collector is a pain and will only release the RAM either, when the program is restarted or if you download another audio track. Sleep radios are download as aac files.";
+                        break;
+                    default:
+                        notes.Text = "No notes";
+                        break;
+                }
             }
+            else
+            {
+                switch (comboBox1.SelectedIndex)
+                {
+                    default:
+                        notes.Text = "No Notes";
+                        break;
+                    case 0:
+                        notes.Text = "Courses and singles  range from 10-20 minutes. They have variations that can be selected and are downloaded as aac files.";
+                        break;
+                    case 1:
+                        notes.Text = "SOS are short 3 minute clips with no variations. Downloaded as aac files.";
+                        break;
+                    case 2:
+                        notes.Text = "Timers range from 5 minutes all the way up to 2 hours. Be warned that this can take up heavy amounts of RAM when downloading! Downloaded as aac files.";
+                        break;
+                    case 3:
+                        notes.Text = "Techniques and support are very short clips ranging from under a minute to 6 minutes. There are no variations. Downloaded as aac files.";
+                        break;
+                }
+            }
+            
         }
 
         private void ClearMedia()
@@ -172,13 +210,13 @@ namespace HeadRipper
             button3.Enabled = false;
         }
 
-        private void ParseSleepcast()
+        private void ParseDefinitive(string Category = "sleepcasts")
         {
             entityID.Text = Read("entityId").ToString();
             Application.DoEvents();
             if(entityID.Text != "0")
             {
-                SleepcastContent.Attributes SA = hsAPI.ParseContent("sleepcasts", Read("entityId").ToString());
+                SleepcastContent.Attributes SA = hsAPI.ParseContent(Category, Read("entityId").ToString());
                 title.Text = (String)Read("title");
                 body.Text = SA.subtitle;
                 description.Text = SA.description;
@@ -195,7 +233,31 @@ namespace HeadRipper
             }
         }
 
-        private void ParseWindDown()
+        private void ParseOddities()
+        {
+            try
+            {
+                entityID.Text = Read("entityId").ToString();
+                Application.DoEvents();
+                if (entityID.Text != "0")
+                {
+                    title.Text = (String)Read("title");
+                    subtext.Text = (String)Read("subtext");
+                    contentID.Text = Read("contentId").ToString();
+                    ordinalNumber.Text = Read("ordinalNumber").ToString();
+                    subtextSecondary.Text = (String)Read("subtextSecondary");
+                    imageMediaId.Text = Read("imageMediaId").ToString();
+                    headerImageMedia.Text = Read("headerImageMediaId").ToString();
+                    paidContent.Checked = (bool)Read("SubscriberContent");
+                    mediaId.Text = hsAPI.ParseAnimationId(contentID.Text);
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void ParseVarious()
         {
             entityID.Text = Read("entityId").ToString();
             Application.DoEvents();
@@ -277,7 +339,7 @@ namespace HeadRipper
         //Sleep casts and SOS share similar enough download checks that its slightly cleaner to bundle them together.
         //Sorta......
         //Not really...........
-        private string Download_SleepCast_SOS()
+        private string Download_Definitive()
         {
             if (File.Exists($"{title.Text.Replace(" ", "_")}_mixed_{sessionId.Text}.mp3"))
             {
@@ -301,7 +363,7 @@ namespace HeadRipper
             }
         }
 
-        private string Download_WindDown()
+        private string Download_Various()
         {
             //Download using Variations ID
             if(variations.Text != "NA" && variations.Text != string.Empty)
@@ -326,14 +388,11 @@ namespace HeadRipper
                     case 0:
                     case 2:
                         //Sleepcast and SOS
-                        DownloadName = Download_SleepCast_SOS();
+                        DownloadName = Download_Definitive();
                         break;
-                    case 1:
-                    case 3:
-                    case 4:
-                    case 5:
+                    default:
                         //Wind Down, Sleepmusic, Soundscape, Sleep Radio
-                        DownloadName = Download_WindDown();
+                        DownloadName = Download_Various();
                         break;
                 }
 
@@ -399,6 +458,16 @@ namespace HeadRipper
         }
 
         private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sleep_CheckedChanged(object sender, EventArgs e)
         {
 
         }
