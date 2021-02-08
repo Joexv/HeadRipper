@@ -1,4 +1,4 @@
-﻿//using NAudio.Wave;
+﻿using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +13,6 @@ using System.Threading;
 using NAudio.Wave.SampleProviders;
 using System.Windows.Forms;
 using System.Diagnostics;
-using NAudio.Wave;
 
 namespace HeadRipper
 {
@@ -66,7 +65,6 @@ namespace HeadRipper
             request.AddHeader("Accept-Encoding", "br, gzip, deflate");
             request.AddHeader("tags", "");
             request.AddHeader("Cookie", "");
-            request.AddHeader("hs-languagepreference", ps.Default.Language.Split('(', ')')[1]);
             IRestResponse response = client.Execute(request);
             Console.WriteLine(response.StatusCode);
             File.WriteAllBytes($"{Name}_{MediaId}.aac", response.RawBytes);
@@ -88,7 +86,6 @@ namespace HeadRipper
             request.AddHeader("Accept-Encoding", "br, gzip, deflate");
             request.AddHeader("tags", "");
             request.AddHeader("Cookie", "");
-            request.AddHeader("hs-languagepreference", ps.Default.Language.Split('(', ')')[1]);
 
             //Main Audio File. This file should be deleted on completion of the mix, but we will double check just in case it wasn't
             if (!File.Exists($"{Name}_Main_{EpisodeId}.aac"))
@@ -174,12 +171,6 @@ namespace HeadRipper
         {
             List<String> categories = new List<String>();
             Categories.Root SleepCat = JsonConvert.DeserializeObject<Categories.Root>(GET(@"https://api.prod.headspace.com/content/view-models/library/topics-menu?location={1}".Replace("{1}", Category)));
-            if (SleepCat.data == null)
-            {
-                MessageBox.Show("Error loading catagories!");
-                return new string[] { "" };
-            }
-
             foreach (Categories.Datum datum in SleepCat.data)
             {
                 categories.Add(datum.attributes.name + "|" + datum.attributes.location + "|" + datum.attributes.id);
@@ -266,24 +257,20 @@ namespace HeadRipper
 
         public String GET(string URL)
         {
-            Console.WriteLine("URL: {0}, \n BearerID: {1}", URL, ps.Default.BearerID);
             var client = new RestClient(URL);
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
+            request.AddHeader("hs-languagepreference", "en-US");
             request.AddHeader("hs-client-version", "301190000");
             request.AddHeader("hs-client-platform", "iOS");
             request.AddHeader("Accept-Language", "en-us");
-            request.AddHeader("Authorization", $"Bearer {ps.Default.BearerID}");
+            request.AddHeader("Authorization", $"bearer {ps.Default.BearerID}");
             request.AddHeader("Accept-Encoding", "br, gzip, deflate");
             request.AddHeader("tags", "");
             request.AddHeader("Cookie", "");
-            request.AddHeader("hs-languagepreference", ps.Default.Language.Split('(', ')')[1]);
-            Console.WriteLine(request.Resource);
             IRestResponse response = client.Execute(request);
             client = null;
-            //Console.WriteLine(response.Content);
             return response.Content;
         }
-
     }
 }

@@ -5,8 +5,5 @@
     <Setting Name="BearerID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Language" Type="System.String" Scope="User">
-      <Value Profile="(Default)">English (en-US)</Value>
-    </Setting>
   </Settings>
 </SettingsFile>
