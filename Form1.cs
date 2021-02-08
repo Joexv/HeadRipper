@@ -27,18 +27,22 @@ namespace HeadRipper
         {
             if (File.Exists("Bearer.txt"))
                 textBox1.Text = File.ReadAllText("Bearer.txt");
+
+            languages.Text = ps.Default.Language;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             File.WriteAllText("Bearer.txt", textBox1.Text);
+            ps.Default.BearerID = textBox1.Text;
+            ps.Default.Save();
         }
 
         public string BearerBox { get; set; }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string Category = meditate.Checked ? "MEDITATE" : "SLEEP";
+           string Category = meditate.Checked ? "MEDITATE" : "SLEEP";
            comboBox1.DataSource = hsAPI.ParseCategories(Category);
            if(comboBox1.Items.Count > 0)
            {
@@ -468,6 +472,17 @@ namespace HeadRipper
         }
 
         private void sleep_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ps.Default.Language = languages.Text;
+            ps.Default.Save();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
