@@ -82,7 +82,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(24, 163);
-            this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button4.Margin = new System.Windows.Forms.Padding(6);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(302, 94);
             this.button4.TabIndex = 3;
@@ -99,7 +99,7 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(342, 77);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -113,7 +113,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(24, 1219);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(2586, 262);
@@ -124,7 +124,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(342, 27);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(360, 33);
             this.comboBox1.TabIndex = 8;
@@ -134,7 +134,7 @@
             // 
             this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(24, 269);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(302, 94);
             this.button1.TabIndex = 9;
@@ -146,7 +146,7 @@
             // 
             this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(1276, 850);
-            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(202, 44);
             this.button2.TabIndex = 10;
@@ -158,7 +158,7 @@
             // 
             this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(1276, 902);
-            this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button3.Margin = new System.Windows.Forms.Padding(6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(202, 44);
             this.button3.TabIndex = 11;
@@ -169,8 +169,8 @@
             // button5
             // 
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(24, 813);
-            this.button5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button5.Location = new System.Drawing.Point(24, 819);
+            this.button5.Margin = new System.Windows.Forms.Padding(6);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(302, 94);
             this.button5.TabIndex = 12;
@@ -181,7 +181,7 @@
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(1276, 952);
-            this.button6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button6.Margin = new System.Windows.Forms.Padding(6);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(202, 44);
             this.button6.TabIndex = 13;
@@ -202,7 +202,7 @@
             // title
             // 
             this.title.Location = new System.Drawing.Point(340, 856);
-            this.title.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.title.Margin = new System.Windows.Forms.Padding(6);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(470, 31);
             this.title.TabIndex = 15;
@@ -210,7 +210,7 @@
             // contentID
             // 
             this.contentID.Location = new System.Drawing.Point(826, 856);
-            this.contentID.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.contentID.Margin = new System.Windows.Forms.Padding(6);
             this.contentID.Name = "contentID";
             this.contentID.Size = new System.Drawing.Size(126, 31);
             this.contentID.TabIndex = 16;
@@ -218,7 +218,7 @@
             // entityID
             // 
             this.entityID.Location = new System.Drawing.Point(968, 856);
-            this.entityID.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.entityID.Margin = new System.Windows.Forms.Padding(6);
             this.entityID.Name = "entityID";
             this.entityID.Size = new System.Drawing.Size(126, 31);
             this.entityID.TabIndex = 17;
@@ -266,7 +266,7 @@
             // ordinalNumber
             // 
             this.ordinalNumber.Location = new System.Drawing.Point(1110, 856);
-            this.ordinalNumber.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ordinalNumber.Margin = new System.Windows.Forms.Padding(6);
             this.ordinalNumber.Name = "ordinalNumber";
             this.ordinalNumber.Size = new System.Drawing.Size(150, 31);
             this.ordinalNumber.TabIndex = 21;
@@ -274,7 +274,7 @@
             // body
             // 
             this.body.Location = new System.Drawing.Point(340, 904);
-            this.body.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.body.Margin = new System.Windows.Forms.Padding(6);
             this.body.Multiline = true;
             this.body.Name = "body";
             this.body.Size = new System.Drawing.Size(470, 89);
@@ -283,7 +283,7 @@
             // subtext
             // 
             this.subtext.Location = new System.Drawing.Point(968, 908);
-            this.subtext.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.subtext.Margin = new System.Windows.Forms.Padding(6);
             this.subtext.Name = "subtext";
             this.subtext.Size = new System.Drawing.Size(292, 31);
             this.subtext.TabIndex = 24;
@@ -291,7 +291,7 @@
             // subtextSecondary
             // 
             this.subtextSecondary.Location = new System.Drawing.Point(968, 958);
-            this.subtextSecondary.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.subtextSecondary.Margin = new System.Windows.Forms.Padding(6);
             this.subtextSecondary.Name = "subtextSecondary";
             this.subtextSecondary.Size = new System.Drawing.Size(292, 31);
             this.subtextSecondary.TabIndex = 25;
@@ -299,7 +299,7 @@
             // imageMediaId
             // 
             this.imageMediaId.Location = new System.Drawing.Point(832, 1056);
-            this.imageMediaId.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.imageMediaId.Margin = new System.Windows.Forms.Padding(6);
             this.imageMediaId.Name = "imageMediaId";
             this.imageMediaId.Size = new System.Drawing.Size(198, 31);
             this.imageMediaId.TabIndex = 26;
@@ -307,7 +307,7 @@
             // headerImageMedia
             // 
             this.headerImageMedia.Location = new System.Drawing.Point(1046, 1056);
-            this.headerImageMedia.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.headerImageMedia.Margin = new System.Windows.Forms.Padding(6);
             this.headerImageMedia.Name = "headerImageMedia";
             this.headerImageMedia.Size = new System.Drawing.Size(214, 31);
             this.headerImageMedia.TabIndex = 27;
@@ -337,7 +337,7 @@
             // 
             this.paidContent.AutoSize = true;
             this.paidContent.Location = new System.Drawing.Point(340, 1106);
-            this.paidContent.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.paidContent.Margin = new System.Windows.Forms.Padding(6);
             this.paidContent.Name = "paidContent";
             this.paidContent.Size = new System.Drawing.Size(190, 29);
             this.paidContent.TabIndex = 30;
@@ -347,7 +347,7 @@
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(1660, 1138);
-            this.button7.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button7.Margin = new System.Windows.Forms.Padding(6);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(202, 44);
             this.button7.TabIndex = 31;
@@ -367,7 +367,7 @@
             // secondaryMediaId
             // 
             this.secondaryMediaId.Location = new System.Drawing.Point(1046, 1144);
-            this.secondaryMediaId.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.secondaryMediaId.Margin = new System.Windows.Forms.Padding(6);
             this.secondaryMediaId.Name = "secondaryMediaId";
             this.secondaryMediaId.Size = new System.Drawing.Size(214, 31);
             this.secondaryMediaId.TabIndex = 32;
@@ -375,7 +375,7 @@
             // description
             // 
             this.description.Location = new System.Drawing.Point(340, 1002);
-            this.description.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.description.Margin = new System.Windows.Forms.Padding(6);
             this.description.Multiline = true;
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(470, 89);
@@ -394,7 +394,7 @@
             // mediaId
             // 
             this.mediaId.Location = new System.Drawing.Point(832, 1144);
-            this.mediaId.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.mediaId.Margin = new System.Windows.Forms.Padding(6);
             this.mediaId.Name = "mediaId";
             this.mediaId.Size = new System.Drawing.Size(198, 31);
             this.mediaId.TabIndex = 35;
@@ -412,7 +412,7 @@
             // sessionId
             // 
             this.sessionId.Location = new System.Drawing.Point(1276, 1054);
-            this.sessionId.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.sessionId.Margin = new System.Windows.Forms.Padding(6);
             this.sessionId.Name = "sessionId";
             this.sessionId.Size = new System.Drawing.Size(198, 31);
             this.sessionId.TabIndex = 37;
@@ -441,7 +441,7 @@
             // 
             this.variations.FormattingEnabled = true;
             this.variations.Location = new System.Drawing.Point(1276, 1142);
-            this.variations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.variations.Margin = new System.Windows.Forms.Padding(6);
             this.variations.Name = "variations";
             this.variations.Size = new System.Drawing.Size(198, 33);
             this.variations.TabIndex = 41;
@@ -470,7 +470,7 @@
             // 
             this.notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notes.Location = new System.Drawing.Point(1660, 856);
-            this.notes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.notes.Margin = new System.Windows.Forms.Padding(6);
             this.notes.Multiline = true;
             this.notes.Name = "notes";
             this.notes.Size = new System.Drawing.Size(950, 129);
@@ -493,9 +493,9 @@
             this.groupBox1.Controls.Add(this.sleep);
             this.groupBox1.Controls.Add(this.meditate);
             this.groupBox1.Location = new System.Drawing.Point(24, 25);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(302, 127);
             this.groupBox1.TabIndex = 46;
             this.groupBox1.TabStop = false;
@@ -505,7 +505,7 @@
             // 
             this.sleep.AutoSize = true;
             this.sleep.Location = new System.Drawing.Point(14, 83);
-            this.sleep.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.sleep.Margin = new System.Windows.Forms.Padding(6);
             this.sleep.Name = "sleep";
             this.sleep.Size = new System.Drawing.Size(98, 29);
             this.sleep.TabIndex = 1;
@@ -518,13 +518,14 @@
             this.meditate.AutoSize = true;
             this.meditate.Checked = true;
             this.meditate.Location = new System.Drawing.Point(14, 38);
-            this.meditate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.meditate.Margin = new System.Windows.Forms.Padding(6);
             this.meditate.Name = "meditate";
             this.meditate.Size = new System.Drawing.Size(126, 29);
             this.meditate.TabIndex = 0;
             this.meditate.TabStop = true;
             this.meditate.Text = "Meditate";
             this.meditate.UseVisualStyleBackColor = true;
+            this.meditate.CheckedChanged += new System.EventHandler(this.meditate_CheckedChanged);
             // 
             // label16
             // 
@@ -601,7 +602,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "HeadRipper";
             this.Load += new System.EventHandler(this.Form1_Load);

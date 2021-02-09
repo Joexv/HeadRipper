@@ -47,7 +47,7 @@ namespace HeadRipper
            if(comboBox1.Items.Count > 0)
            {
                 button1.Enabled = true;
-                button5.Enabled = sleep.Checked;
+                button5.Enabled = true;
            }
         }
 
@@ -417,6 +417,46 @@ namespace HeadRipper
         //Download All Visible
         private void button5_Click(object sender, EventArgs e)
         {
+            if (sleep.Checked)
+                ripSleepMedia();
+            else
+                ripMeditationMedia();
+        }
+
+        private void ripMeditationMedia()
+        {
+            foreach (Media.Attributes Matt in hsAPI.ParseMedia(comboBox1.Text))
+            {
+                Console.WriteLine(Matt.title);
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 1:
+                    case 3:
+                        try
+                        {
+                            if (!File.Exists($"{Matt.title}_{Matt.contentId}.aac"))
+                                hsAPI.Download(Matt.contentId.ToString(), Matt.title.Replace(" ", "_"));
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        break;
+                    default:
+                        try
+                        {
+                            List<String> IDs = hsAPI.ParseWindDown(Matt.entityId.ToString());
+                            foreach (string ID in IDs)
+                            {
+                                if (!File.Exists($"{Matt.title}_{ID}.aac") && ID != "NA" && ID != string.Empty)
+                                    hsAPI.Download(ID, Matt.title.Replace(" ", "_"));
+                            }
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        break;
+                }  
+            }
+        }
+
+        private void ripSleepMedia()
+        {
             foreach (Media.Attributes Matt in hsAPI.ParseMedia(comboBox1.Text))
             {
                 switch (comboBox1.SelectedIndex)
@@ -425,10 +465,12 @@ namespace HeadRipper
                         //Sleepcast
                         try
                         {
-                            SleepcastContent.Attributes SA = hsAPI.ParseContent("sleepcasts", Matt.entityId.ToString());
-                            if (!File.Exists($"{Matt.title.Replace(" ", "_")}_mixed_{SA.dailySession.episodeId}.mp3") && Matt.title != string.Empty)
-                                hsAPI.Download(SA.dailySession.primaryMediaId.ToString(), SA.dailySession.secondaryMediaId.ToString(),
-                                    Matt.title.Replace(" ", "_"), SA.dailySession.episodeId.ToString());
+                            List<String> IDs = hsAPI.ParseWindDown(Matt.entityId.ToString());
+                            foreach (string ID in IDs)
+                            {
+                                if (!File.Exists($"{Matt.title}_{ID}.aac") && ID != "NA" && ID != string.Empty)
+                                    hsAPI.Download(ID, Matt.title.Replace(" ", "_"));
+                            }
                         }
                         catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
@@ -451,14 +493,14 @@ namespace HeadRipper
                         try
                         {
                             if (!File.Exists($"{Matt.title}_{Matt.contentId}.aac"))
-                                    hsAPI.Download(Matt.contentId.ToString(), Matt.title.Replace(" ", "_"));
+                                hsAPI.Download(Matt.contentId.ToString(), Matt.title.Replace(" ", "_"));
                         }
                         catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
                     default:
                         break;
                 }
-            }  
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -483,6 +525,11 @@ namespace HeadRipper
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void meditate_CheckedChanged(object sender, EventArgs e)
         {
 
         }
