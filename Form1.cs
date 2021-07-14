@@ -380,7 +380,7 @@ namespace HeadRipper
             //Download file using Media ID, with Secondary ID used to download background noise
             else if (secondaryMediaId.Text != "0" && mediaId.Text != string.Empty && secondaryMediaId.Text != string.Empty)
             {
-                return hsAPI.Download(mediaId.Text, secondaryMediaId.Text, title.Text.Replace(" ", "_"), sessionId.Text, keepMain.Checked, keepBackground.Checked, autoMerge.Checked);
+                return hsAPI.Download(mediaId.Text, secondaryMediaId.Text, title.Text.Replace(" ", "_"), sessionId.Text, keepMain.Checked, keepBackground.Checked, autoMerge.Checked, Decimal.ToDouble(volumeUpDown.Value), Decimal.ToDouble(mainVolume.Value));
             }
             //Download File using Media ID, no Secondary Media
             else if (mediaId.Text != string.Empty && secondaryMediaId.Text == string.Empty)
@@ -442,7 +442,7 @@ namespace HeadRipper
                     DownloadName = Download_Definitive();
 
                 loadingForm.Close();
-                if (File.Exists(DownloadName))
+                if (File.Exists(DownloadName) || !autoMerge.Checked)
                 {
                     MessageBox.Show("Done");
                     button2.Enabled = true;
@@ -450,7 +450,7 @@ namespace HeadRipper
                 }
                 else
                 {
-                    MessageBox.Show("Error", "Missing required audio file. File seems to have failed to download.");
+                    MessageBox.Show("Missing required audio file. File seems to have failed to download.", "Error");
                 }
             }
         }

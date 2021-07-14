@@ -75,7 +75,7 @@ namespace HeadRipper
             return $"{Name}_{MediaId}.aac";
         }
 
-        public string Download(string MediaId, string BackgroundId, string Name, string EpisodeId, bool keepMain, bool keepBackground, bool autoMerge)
+        public string Download(string MediaId, string BackgroundId, string Name, string EpisodeId, bool keepMain, bool keepBackground, bool autoMerge, double Volume = 1.0, double mainVolume = 1.0)
         {
             var client = new RestClient(aacURL.Replace("{1}", MediaId));
             client.Timeout = -1;
@@ -109,10 +109,40 @@ namespace HeadRipper
                 response = null;
             }
 
-            client = null;
-
             ProcessStartInfo ProcessInfo;
             Process Process;
+            if (Volume != 1)
+            {
+                File.Move($"{Name}_Background.aac", $"{Name}_Background_BeforeAdjust.aac");
+                //;\"volume = {Volume}\"
+                string FFMPEGcmd = "ffmpeg.exe -i " +
+                     $"{Name}_Background_BeforeAdjust.aac -filter_complex \"volume={Volume}\" " +
+                     $"{Name}_Background.aac";
+                Console.WriteLine(FFMPEGcmd);
+                ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
+                ProcessInfo.UseShellExecute = true;
+                Process = Process.Start(ProcessInfo);
+                Process.WaitForExit();
+                Process.Dispose();
+            }
+
+            if (Volume != 1)
+            {
+                File.Move($"{Name}_Main_{EpisodeId}.aac", $"{Name}_Main_{EpisodeId}_BeforeAdjust.aac");
+                //;\"volume = {Volume}\"
+                string FFMPEGcmd = "ffmpeg.exe -i " +
+                     $"{Name}_Main_{EpisodeId}_BeforeAdjust.aac -filter_complex \"volume={Volume}\" " +
+                     $"{Name}_Main_{EpisodeId}.aac";
+                Console.WriteLine(FFMPEGcmd);
+                ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
+                ProcessInfo.UseShellExecute = true;
+                Process = Process.Start(ProcessInfo);
+                Process.WaitForExit();
+                Process.Dispose();
+            }
+
+            client = null;
+
             try
             {
                 if (autoMerge)

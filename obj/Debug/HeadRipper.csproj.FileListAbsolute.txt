@@ -78,3 +78,5 @@ C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.csproj.C
 C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.csproj.CopyComplete
 C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.exe
 C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.pdb
+C:\Users\HPD\Documents\Github\HeadRipper\obj\Debug\HeadRipper.Alt_Forms.Category.resources
+C:\Users\HPD\Documents\Github\HeadRipper\obj\Debug\HeadRipper.Alt_Forms.Loading.resources

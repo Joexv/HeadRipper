@@ -76,3 +76,5 @@ C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\release\System.Security.A
 C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\release\System.Security.Principal.Windows.xml
 C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Release\HeadRipper.Alt_Forms.Category.resources
 C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Release\HeadRipper.Alt_Forms.Loading.resources
+C:\Users\HPD\Documents\Github\HeadRipper\obj\Release\HeadRipper.Alt_Forms.Category.resources
+C:\Users\HPD\Documents\Github\HeadRipper\obj\Release\HeadRipper.Alt_Forms.Loading.resources
