@@ -46,3 +46,35 @@ C:\Users\HPD\Documents\Github\HeadRipper\bin\Debug\System.Security.Principal.Win
 C:\Users\HPD\Documents\Github\HeadRipper\obj\Debug\HeadRipper.csproj.CopyComplete
 C:\Users\HPD\Documents\Github\HeadRipper\obj\Debug\HeadRipper.exe
 C:\Users\HPD\Documents\Github\HeadRipper\obj\Debug\HeadRipper.pdb
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\ffmpeg.exe
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\HeadRipper.exe.config
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\HeadRipper.exe
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\HeadRipper.pdb
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.Asio.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.Core.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.Midi.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.Wasapi.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.WinForms.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.WinMM.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\RestSharp.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\NAudio.xml
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\RestSharp.xml
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.csproj.AssemblyReference.cache
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.Alt_Forms.Category.resources
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.Alt_Forms.Loading.resources
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.Form1.resources
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.Properties.Resources.resources
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.csproj.GenerateResource.cache
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.csproj.CoreCompileInputs.cache
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.csproj.CopyComplete
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.exe
+C:\Users\Stealth Gouda\Documents\GitHub\HeadRipper\obj\Debug\HeadRipper.pdb

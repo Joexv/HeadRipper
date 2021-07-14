@@ -75,7 +75,7 @@ namespace HeadRipper
             return $"{Name}_{MediaId}.aac";
         }
 
-        public string Download(string MediaId, string BackgroundId, string Name, string EpisodeId)
+        public string Download(string MediaId, string BackgroundId, string Name, string EpisodeId, bool keepMain, bool keepBackground, bool autoMerge)
         {
             var client = new RestClient(aacURL.Replace("{1}", MediaId));
             client.Timeout = -1;
@@ -115,17 +115,23 @@ namespace HeadRipper
             Process Process;
             try
             {
-                string FFMPEGcmd = "ffmpeg.exe -i " +
-                    $"{Name}_Main_{EpisodeId}.aac -i " +
-                    $"{Name}_Background.aac -filter_complex amix=inputs=2:duration=longest " +
-                    $"{Name}_mixed_{EpisodeId}.mp3";
-                Console.WriteLine(FFMPEGcmd);
-                ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
-                ProcessInfo.UseShellExecute = true;
-                Process = Process.Start(ProcessInfo);
-                Process.WaitForExit();
-                Process.Dispose();
-                File.Delete($"{Name}_Main_{EpisodeId}.aac");
+                if (autoMerge)
+                {
+                    string FFMPEGcmd = "ffmpeg.exe -i " +
+                     $"{Name}_Main_{EpisodeId}.aac -i " +
+                     $"{Name}_Background.aac -filter_complex amix=inputs=2:duration=longest " +
+                     $"{Name}_mixed_{EpisodeId}.mp3";
+                    Console.WriteLine(FFMPEGcmd);
+                    ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
+                    ProcessInfo.UseShellExecute = true;
+                    Process = Process.Start(ProcessInfo);
+                    Process.WaitForExit();
+                    Process.Dispose();
+                }
+                if(!keepMain)
+                    File.Delete($"{Name}_Main_{EpisodeId}.aac");
+                if (!keepBackground)
+                    File.Delete($"{Name}_Background_{EpisodeId}.aac");
             }
             catch (Exception e)
             {
@@ -172,21 +178,29 @@ namespace HeadRipper
 
         public string[] ParseCategories(string Category)
         {
-            List<String> categories = new List<String>();
-            Categories.Root SleepCat = JsonConvert.DeserializeObject<Categories.Root>(GET(@"https://api.prod.headspace.com/content/view-models/library/topics-menu?location={1}".Replace("{1}", Category)));
-            if (SleepCat.data == null)
+            try
             {
-                MessageBox.Show("Error loading catagories!");
-                return new string[] { "" };
-            }
+                List<String> categories = new List<String>();
+                Categories.Root SleepCat = JsonConvert.DeserializeObject<Categories.Root>(GET(@"https://api.prod.headspace.com/content/view-models/library/topics-menu?location={1}".Replace("{1}", Category)));
+                if (SleepCat.data == null)
+                {
+                    MessageBox.Show("Error loading catagories!");
+                    return new string[] { "FAILURE" };
+                }
 
-            foreach (Categories.Datum datum in SleepCat.data)
-            {
-                categories.Add(datum.attributes.name + "|" + datum.attributes.location + "|" + datum.attributes.id);
+                foreach (Categories.Datum datum in SleepCat.data)
+                {
+                    categories.Add(datum.attributes.name + "|" + datum.attributes.location + "|" + datum.attributes.id);
+                }
+                Console.WriteLine(categories.ToArray());
+                return categories.ToArray();
             }
-            Console.WriteLine(categories.ToArray());
-            return categories.ToArray();
+            catch {
+                MessageBox.Show("There was an error loading the categories from Headspace. Double check your BearerID.", "ERROR");
+                return new string[] { "FAILURE"};
+            }
         }
+            
 
         public Media.Attributes[] ParseMedia(string Category)
         {
@@ -237,6 +251,9 @@ namespace HeadRipper
             WindDown.Root WDRoot = JsonConvert.DeserializeObject<WindDown.Root>(Response);
             foreach (WindDown.Included included in WDRoot.included)
             {
+                Console.Write($"\nScanning for {included}\n");
+                if (included == null)
+                    break;
                 if (included.type == "mediaItems")
                     IDs.Add(included.id);
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HeadRipper.Alt_Forms;
 using Newtonsoft.Json;
 
 namespace HeadRipper
@@ -18,17 +20,43 @@ namespace HeadRipper
     public partial class Form1 : Form
     {
         HeadspaceAPI hsAPI = new HeadspaceAPI();
+
         public Form1()
         {
             InitializeComponent();
         }
+
+        string DefinitiveDefault = 
+            "Timers|MEDITATE|60\n" +
+            "SOS|MEDITATE|59\n" +
+            "Techniques and support|MEDITATE|61\n" +
+            "Sleepcasts|SLEEP|41\n" +
+            "Kids and parents|SLEEP|89\n" +
+            "Nighttime SOS|SLEEP|47\n" +
+            "Sleep radio|SLEEP|48";
+
+        string VariableDefault =
+            "Wind downs|SLEEP|43\n" +
+            "Courses and singles|MEDITATE|58\n" +
+            "Sleep music|SLEEP|42\n" +
+            "Eve's guide to sleep|SLEEP|86\n" +
+            "Soundscapes|SLEEP|44";
 
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists("Bearer.txt"))
                 textBox1.Text = File.ReadAllText("Bearer.txt");
 
+            if (!File.Exists("Variable.txt"))
+                File.WriteAllText("Variable.txt", VariableDefault);
+
+            if (!File.Exists("Definitive.txt"))
+                File.WriteAllText("Definitive.txt", DefinitiveDefault);
+
             languages.Text = ps.Default.Language;
+            autoMerge.Checked = ps.Default.autoMerge;
+            keepBackground.Checked = ps.Default.keepBackground;
+            keepMain.Checked = ps.Default.keepMain;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -93,7 +121,8 @@ namespace HeadRipper
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             ClearMedia();
-            //this.custTableView.Rows[this.custTableView.CurrentRow.Index].Cells["ID"].Value
+            #region OLD Check
+            /*
             if (sleep.Checked)
             {
                 switch (comboBox1.SelectedIndex)
@@ -123,7 +152,30 @@ namespace HeadRipper
                 }
                 
             }
-            
+            */
+            #endregion
+
+            Console.WriteLine("Category");
+            Console.WriteLine(comboBox1.SelectedItem.ToString());
+            Console.WriteLine("--------------------");
+
+            if (File.ReadAllLines("Variable.txt").Contains(comboBox1.SelectedItem.ToString()))
+            {
+                Console.WriteLine("Audio being parsed as Variable");
+                ParseVarious();
+            }
+            else if (File.ReadAllLines("Definitive.txt").Contains(comboBox1.SelectedItem.ToString()))
+            {
+                Console.WriteLine("Audio being parsed as Definitive");
+                ParseDefinitive(); 
+            }
+            else //Fail safe, shouldn't be needed
+            {
+                Console.WriteLine("Audio being parsed as no category/SOS");
+                ParseSOS();
+            }
+                
+         
 
             Application.DoEvents();
 
@@ -225,6 +277,7 @@ namespace HeadRipper
                 body.Text = SA.subtitle;
                 description.Text = SA.description;
                 subtext.Text = (String)Read("subtext");
+                body.Text = (String)Read("bodyText");
                 contentID.Text = Read("contentId").ToString();
                 ordinalNumber.Text = Read("ordinalNumber").ToString();
                 subtextSecondary.Text = (String)Read("subtextSecondary");
@@ -234,30 +287,6 @@ namespace HeadRipper
                 secondaryMediaId.Text = SA.dailySession.secondaryMediaId.ToString();
                 mediaId.Text = SA.dailySession.primaryMediaId.ToString();
                 sessionId.Text = SA.dailySession.episodeId.ToString();
-            }
-        }
-
-        private void ParseOddities()
-        {
-            try
-            {
-                entityID.Text = Read("entityId").ToString();
-                Application.DoEvents();
-                if (entityID.Text != "0")
-                {
-                    title.Text = (String)Read("title");
-                    subtext.Text = (String)Read("subtext");
-                    contentID.Text = Read("contentId").ToString();
-                    ordinalNumber.Text = Read("ordinalNumber").ToString();
-                    subtextSecondary.Text = (String)Read("subtextSecondary");
-                    imageMediaId.Text = Read("imageMediaId").ToString();
-                    headerImageMedia.Text = Read("headerImageMediaId").ToString();
-                    paidContent.Checked = (bool)Read("SubscriberContent");
-                    mediaId.Text = hsAPI.ParseAnimationId(contentID.Text);
-                }
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -353,7 +382,7 @@ namespace HeadRipper
             //Download file using Media ID, with Secondary ID used to download background noise
             else if (secondaryMediaId.Text != "0" && mediaId.Text != string.Empty && secondaryMediaId.Text != string.Empty)
             {
-                return hsAPI.Download(mediaId.Text, secondaryMediaId.Text, title.Text.Replace(" ", "_"), sessionId.Text);
+                return hsAPI.Download(mediaId.Text, secondaryMediaId.Text, title.Text.Replace(" ", "_"), sessionId.Text, keepMain.Checked, keepBackground.Checked, autoMerge.Checked);
             }
             //Download File using Media ID, no Secondary Media
             else if (mediaId.Text != string.Empty && secondaryMediaId.Text == string.Empty)
@@ -384,13 +413,18 @@ namespace HeadRipper
         //Download Button
         private void button6_Click(object sender, EventArgs e)
         {
+            Loading loadingForm = new Loading();
+            loadingForm.Show();
             if (title.Text != string.Empty)
             {
                 string DownloadName = "";
-                switch (comboBox1.SelectedIndex)
+                #region OLD CHECK
+                /*
+                switch (comboBox1.SelectedText)
                 {
-                    case 0:
-                    case 2:
+                    case "Sleepcasts|SLEEP|41":
+                    case "Nighttime SOS|SLEEP|47":
+                    case "SOS|MEDITATE|59":
                         //Sleepcast and SOS
                         DownloadName = Download_Definitive();
                         break;
@@ -399,8 +433,17 @@ namespace HeadRipper
                         DownloadName = Download_Various();
                         break;
                 }
+                */
+                #endregion
 
+                if (File.ReadAllLines("Variable.txt").Contains(comboBox1.SelectedItem.ToString()))
+                    DownloadName = Download_Various();
+                else if (File.ReadAllLines("Definitive.txt").Contains(comboBox1.SelectedItem.ToString()))
+                    DownloadName = Download_Definitive();
+                else
+                    DownloadName = Download_Definitive();
 
+                loadingForm.Close();
                 if (File.Exists(DownloadName))
                 {
                     MessageBox.Show("Done");
@@ -532,6 +575,35 @@ namespace HeadRipper
         private void meditate_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void keepMain_CheckedChanged(object sender, EventArgs e)
+        {
+            ps.Default.keepMain = keepMain.Checked;
+            ps.Default.Save();
+        }
+
+        private void keepBackground_CheckedChanged(object sender, EventArgs e)
+        {
+            ps.Default.keepBackground = keepBackground.Checked;
+            ps.Default.Save();
+        }
+
+        private void mergeAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            ps.Default.autoMerge = autoMerge.Checked;
+            ps.Default.Save();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Category cat = new Category();
+            cat.Show();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Process.Start(Application.StartupPath);
         }
     }
 }

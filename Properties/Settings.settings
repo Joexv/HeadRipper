@@ -8,5 +8,14 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">English (en-US)</Value>
     </Setting>
+    <Setting Name="autoMerge" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="keepMain" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="keepBackground" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
