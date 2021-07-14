@@ -55,6 +55,7 @@ namespace HeadRipper
             autoMerge.Checked = ps.Default.autoMerge;
             keepBackground.Checked = ps.Default.keepBackground;
             keepMain.Checked = ps.Default.keepMain;
+            beforeMerge.Checked = ps.Default.volumeBeforeMerge;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -380,7 +381,7 @@ namespace HeadRipper
             //Download file using Media ID, with Secondary ID used to download background noise
             else if (secondaryMediaId.Text != "0" && mediaId.Text != string.Empty && secondaryMediaId.Text != string.Empty)
             {
-                return hsAPI.Download(mediaId.Text, secondaryMediaId.Text, title.Text.Replace(" ", "_"), sessionId.Text, keepMain.Checked, keepBackground.Checked, autoMerge.Checked, Decimal.ToDouble(volumeUpDown.Value), Decimal.ToDouble(mainVolume.Value));
+                return hsAPI.Download(mediaId.Text, secondaryMediaId.Text, title.Text.Replace(" ", "_"), sessionId.Text, keepMain.Checked, keepBackground.Checked, autoMerge.Checked, Decimal.ToDouble(volumeUpDown.Value), Decimal.ToDouble(mainVolume.Value), beforeMerge.Checked);
             }
             //Download File using Media ID, no Secondary Media
             else if (mediaId.Text != string.Empty && secondaryMediaId.Text == string.Empty)
@@ -413,6 +414,7 @@ namespace HeadRipper
         {
             Loading loadingForm = new Loading();
             loadingForm.Show();
+            Application.DoEvents();
             if (title.Text != string.Empty)
             {
                 string DownloadName = "";
@@ -607,6 +609,12 @@ namespace HeadRipper
         private void mainVolume_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void beforeMerge_CheckedChanged(object sender, EventArgs e)
+        {
+            ps.Default.volumeBeforeMerge = beforeMerge.Checked;
+            ps.Default.Save();
         }
     }
 }

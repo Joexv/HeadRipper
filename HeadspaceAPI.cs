@@ -75,7 +75,7 @@ namespace HeadRipper
             return $"{Name}_{MediaId}.aac";
         }
 
-        public string Download(string MediaId, string BackgroundId, string Name, string EpisodeId, bool keepMain, bool keepBackground, bool autoMerge, double Volume = 1.0, double mainVolume = 1.0)
+        public string Download(string MediaId, string BackgroundId, string Name, string EpisodeId, bool keepMain, bool keepBackground, bool autoMerge, double Volume = 1.0, double mainVolume = 1.0, bool beforeMerge = false)
         {
             var client = new RestClient(aacURL.Replace("{1}", MediaId));
             client.Timeout = -1;
@@ -111,46 +111,16 @@ namespace HeadRipper
 
             ProcessStartInfo ProcessInfo;
             Process Process;
-            if (Volume != 1)
+            if (beforeMerge)
             {
-                File.Move($"{Name}_Background.aac", $"{Name}_Background_BeforeAdjust.aac");
-                //;\"volume = {Volume}\"
-                string FFMPEGcmd = "ffmpeg.exe -i " +
-                     $"{Name}_Background_BeforeAdjust.aac -filter_complex \"volume={Volume}\" " +
-                     $"{Name}_Background.aac";
-                Console.WriteLine(FFMPEGcmd);
-                ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
-                ProcessInfo.UseShellExecute = true;
-                Process = Process.Start(ProcessInfo);
-                Process.WaitForExit();
-                Process.Dispose();
-            }
-
-            if (Volume != 1)
-            {
-                File.Move($"{Name}_Main_{EpisodeId}.aac", $"{Name}_Main_{EpisodeId}_BeforeAdjust.aac");
-                //;\"volume = {Volume}\"
-                string FFMPEGcmd = "ffmpeg.exe -i " +
-                     $"{Name}_Main_{EpisodeId}_BeforeAdjust.aac -filter_complex \"volume={Volume}\" " +
-                     $"{Name}_Main_{EpisodeId}.aac";
-                Console.WriteLine(FFMPEGcmd);
-                ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
-                ProcessInfo.UseShellExecute = true;
-                Process = Process.Start(ProcessInfo);
-                Process.WaitForExit();
-                Process.Dispose();
-            }
-
-            client = null;
-
-            try
-            {
-                if (autoMerge)
+                if (Volume != 1.00)
                 {
+                    File.Delete($"{Name}_Background_BeforeAdjust.aac");
+                    File.Move($"{Name}_Background.aac", $"{Name}_Background_BeforeAdjust.aac");
+                    //;\"volume = {Volume}\"
                     string FFMPEGcmd = "ffmpeg.exe -i " +
-                     $"{Name}_Main_{EpisodeId}.aac -i " +
-                     $"{Name}_Background.aac -filter_complex amix=inputs=2:duration=longest " +
-                     $"{Name}_mixed_{EpisodeId}.mp3";
+                         $"{Name}_Background_BeforeAdjust.aac -filter_complex \"volume={Volume}\" " +
+                         $"{Name}_Background.aac";
                     Console.WriteLine(FFMPEGcmd);
                     ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
                     ProcessInfo.UseShellExecute = true;
@@ -158,13 +128,76 @@ namespace HeadRipper
                     Process.WaitForExit();
                     Process.Dispose();
                 }
-                if(!keepMain)
+
+                if (mainVolume != 1.00)
+                {
+                    File.Delete($"{Name}_Main_{EpisodeId}_BeforeAdjust.aac");
+                    File.Move($"{Name}_Main_{EpisodeId}.aac", $"{Name}_Main_{EpisodeId}_BeforeAdjust.aac");
+                    //;\"volume = {Volume}\"
+                    string FFMPEGcmd = "ffmpeg.exe -i " +
+                         $"{Name}_Main_{EpisodeId}_BeforeAdjust.aac -filter_complex \"volume={mainVolume}\" " +
+                         $"{Name}_Main_{EpisodeId}.aac";
+                    Console.WriteLine(FFMPEGcmd);
+                    ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
+                    ProcessInfo.UseShellExecute = true;
+                    Process = Process.Start(ProcessInfo);
+                    Process.WaitForExit();
+                    Process.Dispose();
+                }
+            }
+
+
+            client = null;
+            Process = null;
+            try
+            {
+                if (autoMerge)
+                {
+                    string FFMPEGcmd = "";
+                    if (beforeMerge)
+                    {
+                        FFMPEGcmd = "ffmpeg.exe -i " +
+                                             $"{Name}_Main_{EpisodeId}.aac -i " +
+                                             $"{Name}_Background.aac -filter_complex amix=inputs=2:duration=longest " +
+                                             $"{Name}_mixed_{EpisodeId}.mp3";
+                    }
+                    else
+                    {
+                        FFMPEGcmd = "ffmpeg.exe -i " +
+                                            $"{Name}_Main_{EpisodeId}.aac -i " +
+                                            $"{Name}_Background.aac -filter_complex " +
+                                            $"\"[0:a]volume = {mainVolume}[a0];" +
+                                            $"[1:a]volume = {Volume}[a1];" +
+                                            $"[a0][a1]amix = inputs = 2[out]\" -map \"[out]\" -ac 2 " +
+                                            $"{Name}_mixed_{EpisodeId}.mp3";
+
+                        //ffmpeg.exe -i Mars_Buggy_Main_0.aac -i Mars_Buggy_Background.aac -filter_complex "[0:a]volume=1[a0]; [1:a]volume=1[a1]; [a0][a1]amix=inputs=2[out]" -map "[out]" -ac 2 Mars_Buggy_mixed_0.mp3
+                    }
+
+                    Console.WriteLine(FFMPEGcmd);
+                    ProcessInfo = new ProcessStartInfo("cmd.exe", "/C cd" + Application.StartupPath + " & " + FFMPEGcmd);
+                    ProcessInfo.UseShellExecute = true;
+                    Process = Process.Start(ProcessInfo);
+                    Process.WaitForExit();
+                    Process.Dispose();
+                }
+
+                if (!keepMain)
+                {
                     File.Delete($"{Name}_Main_{EpisodeId}.aac");
+                    File.Delete($"{Name}_Main_{EpisodeId}_BeforeAdjust.aac");
+                }
+                    
                 if (!keepBackground)
+                {
                     File.Delete($"{Name}_Background_{EpisodeId}.aac");
+                    File.Delete($"{Name}_Background_BeforeAdjust.aac");
+                }
+                    
             }
             catch (Exception e)
             {
+                Process.Dispose();
                 Console.WriteLine("Error Processing ExecuteCommand : " + e.Message);
             }
 

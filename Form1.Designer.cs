@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -85,6 +86,8 @@
             this.keepBackground = new System.Windows.Forms.CheckBox();
             this.keepMain = new System.Windows.Forms.CheckBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.beforeMerge = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -473,7 +476,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(1701, 817);
+            this.label14.Location = new System.Drawing.Point(1619, 808);
             this.label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 25);
@@ -483,7 +486,7 @@
             // notes
             // 
             this.notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notes.Location = new System.Drawing.Point(1706, 856);
+            this.notes.Location = new System.Drawing.Point(1704, 808);
             this.notes.Margin = new System.Windows.Forms.Padding(6);
             this.notes.Multiline = true;
             this.notes.Name = "notes";
@@ -568,6 +571,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.beforeMerge);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.mainVolume);
@@ -576,11 +580,11 @@
             this.groupBox2.Controls.Add(this.autoMerge);
             this.groupBox2.Controls.Add(this.keepBackground);
             this.groupBox2.Controls.Add(this.keepMain);
-            this.groupBox2.Location = new System.Drawing.Point(1702, 1002);
+            this.groupBox2.Location = new System.Drawing.Point(1702, 948);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(910, 196);
+            this.groupBox2.Size = new System.Drawing.Size(910, 250);
             this.groupBox2.TabIndex = 49;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Audio Settings";
@@ -588,7 +592,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(228, 155);
+            this.label19.Location = new System.Drawing.Point(7, 199);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(675, 25);
             this.label19.TabIndex = 7;
@@ -711,6 +715,21 @@
             this.button8.Text = "Edit Category Options";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // beforeMerge
+            // 
+            this.beforeMerge.AutoSize = true;
+            this.beforeMerge.Location = new System.Drawing.Point(436, 165);
+            this.beforeMerge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.beforeMerge.Name = "beforeMerge";
+            this.beforeMerge.Size = new System.Drawing.Size(358, 29);
+            this.beforeMerge.TabIndex = 8;
+            this.beforeMerge.Text = "Adjust audio before merging files";
+            this.toolTip1.SetToolTip(this.beforeMerge, "Adjusting volume before the merge will allow you to have the \r\ntwo seperate files" +
+        " with audio already changed. \r\nThis takes significantly longer to process though" +
+        ".");
+            this.beforeMerge.UseVisualStyleBackColor = true;
+            this.beforeMerge.CheckedChanged += new System.EventHandler(this.beforeMerge_CheckedChanged);
             // 
             // Form1
             // 
@@ -840,6 +859,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown mainVolume;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.CheckBox beforeMerge;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
