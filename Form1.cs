@@ -28,11 +28,9 @@ namespace HeadRipper
 
         string DefinitiveDefault = 
             "Timers|MEDITATE|60\n" +
-            "SOS|MEDITATE|59\n" +
             "Techniques and support|MEDITATE|61\n" +
             "Sleepcasts|SLEEP|41\n" +
             "Kids and parents|SLEEP|89\n" +
-            "Nighttime SOS|SLEEP|47\n" +
             "Sleep radio|SLEEP|48";
 
         string VariableDefault =
