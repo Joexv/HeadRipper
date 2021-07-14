@@ -603,5 +603,10 @@ namespace HeadRipper
         {
             Process.Start(Application.StartupPath);
         }
+
+        private void mainVolume_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
