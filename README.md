@@ -1,3 +1,9 @@
+#NOTE
+Looks like headspace changed how their clients interact witht he website. While not technically removing BearerIDs they did change how the website requires them to be formatted. As is the app wont work. Just needs a bit of TLC to get back up and running. If someone feels like doing so please do so. I currently dont have the time to atm.
+
+
+
+
 # HeadRipper
 Headspace Windows Downloader and Player
 
