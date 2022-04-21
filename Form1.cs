@@ -616,5 +616,31 @@ namespace HeadRipper
             ps.Default.volumeBeforeMerge = beforeMerge.Checked;
             ps.Default.Save();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string Text_Table = "";
+            foreach (var textbox in groupBox3.Controls.OfType<TextBox>())
+            {
+                Text_Table = Text_Table + $"{textbox.Text},";
+            }
+
+            Text_Table = Text_Table + variations.Text;
+
+            if (!String.IsNullOrEmpty(Text_Table))
+            {
+                MessageBox.Show($"Copied!\n{Text_Table}");
+                Clipboard.SetText(Text_Table);
+            }  
+            else
+                MessageBox.Show("No information was copied");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Cookie cookie = new Cookie();
+            cookie.main = this;
+            cookie.Show();
+        }
     }
 }

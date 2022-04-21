@@ -77,6 +77,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.languages = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.beforeMerge = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.mainVolume = new System.Windows.Forms.NumericUpDown();
@@ -86,13 +87,16 @@
             this.keepBackground = new System.Windows.Forms.CheckBox();
             this.keepMain = new System.Windows.Forms.CheckBox();
             this.button8 = new System.Windows.Forms.Button();
-            this.beforeMerge = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button9 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeUpDown)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button4
@@ -120,7 +124,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 82;
-            this.dataGridView1.Size = new System.Drawing.Size(3020, 716);
+            this.dataGridView1.Size = new System.Drawing.Size(2972, 716);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -128,11 +132,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 1219);
+            this.textBox1.Location = new System.Drawing.Point(24, 1259);
             this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(2586, 262);
+            this.textBox1.Size = new System.Drawing.Size(2586, 222);
             this.textBox1.TabIndex = 7;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -161,7 +165,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(1276, 850);
+            this.button2.Location = new System.Drawing.Point(943, 58);
             this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(202, 44);
@@ -173,7 +177,7 @@
             // button3
             // 
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(1276, 902);
+            this.button3.Location = new System.Drawing.Point(943, 110);
             this.button3.Margin = new System.Windows.Forms.Padding(6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(202, 44);
@@ -196,7 +200,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1276, 952);
+            this.button6.Location = new System.Drawing.Point(943, 160);
             this.button6.Margin = new System.Windows.Forms.Padding(6);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(202, 44);
@@ -208,16 +212,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 1173);
+            this.label1.Location = new System.Drawing.Point(19, 1228);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(657, 25);
+            this.label1.Size = new System.Drawing.Size(1636, 25);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Bearer ID: Required. Used for authentication on Headspace servers";
+            this.label1.Text = "Bearer ID: Required. Used for authentication on Headspace servers. Being actievly" +
+    " logged into your browser has been reported to make HeadRipper perform more reli" +
+    "ably";
             // 
             // title
             // 
-            this.title.Location = new System.Drawing.Point(340, 856);
+            this.title.Location = new System.Drawing.Point(7, 64);
             this.title.Margin = new System.Windows.Forms.Padding(6);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(470, 31);
@@ -225,7 +231,7 @@
             // 
             // contentID
             // 
-            this.contentID.Location = new System.Drawing.Point(826, 856);
+            this.contentID.Location = new System.Drawing.Point(493, 64);
             this.contentID.Margin = new System.Windows.Forms.Padding(6);
             this.contentID.Name = "contentID";
             this.contentID.Size = new System.Drawing.Size(126, 31);
@@ -233,7 +239,7 @@
             // 
             // entityID
             // 
-            this.entityID.Location = new System.Drawing.Point(968, 856);
+            this.entityID.Location = new System.Drawing.Point(635, 64);
             this.entityID.Margin = new System.Windows.Forms.Padding(6);
             this.entityID.Name = "entityID";
             this.entityID.Size = new System.Drawing.Size(126, 31);
@@ -242,7 +248,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(342, 819);
+            this.label2.Location = new System.Drawing.Point(9, 27);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 25);
@@ -252,7 +258,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(820, 825);
+            this.label3.Location = new System.Drawing.Point(487, 33);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 25);
@@ -262,7 +268,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(962, 825);
+            this.label4.Location = new System.Drawing.Point(629, 33);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 25);
@@ -272,7 +278,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1104, 825);
+            this.label5.Location = new System.Drawing.Point(771, 33);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(162, 25);
@@ -281,7 +287,7 @@
             // 
             // ordinalNumber
             // 
-            this.ordinalNumber.Location = new System.Drawing.Point(1110, 856);
+            this.ordinalNumber.Location = new System.Drawing.Point(777, 64);
             this.ordinalNumber.Margin = new System.Windows.Forms.Padding(6);
             this.ordinalNumber.Name = "ordinalNumber";
             this.ordinalNumber.Size = new System.Drawing.Size(150, 31);
@@ -289,7 +295,7 @@
             // 
             // body
             // 
-            this.body.Location = new System.Drawing.Point(340, 905);
+            this.body.Location = new System.Drawing.Point(7, 113);
             this.body.Margin = new System.Windows.Forms.Padding(6);
             this.body.Multiline = true;
             this.body.Name = "body";
@@ -298,7 +304,7 @@
             // 
             // subtext
             // 
-            this.subtext.Location = new System.Drawing.Point(968, 908);
+            this.subtext.Location = new System.Drawing.Point(635, 116);
             this.subtext.Margin = new System.Windows.Forms.Padding(6);
             this.subtext.Name = "subtext";
             this.subtext.Size = new System.Drawing.Size(292, 31);
@@ -306,7 +312,7 @@
             // 
             // subtextSecondary
             // 
-            this.subtextSecondary.Location = new System.Drawing.Point(968, 958);
+            this.subtextSecondary.Location = new System.Drawing.Point(635, 166);
             this.subtextSecondary.Margin = new System.Windows.Forms.Padding(6);
             this.subtextSecondary.Name = "subtextSecondary";
             this.subtextSecondary.Size = new System.Drawing.Size(292, 31);
@@ -314,7 +320,7 @@
             // 
             // imageMediaId
             // 
-            this.imageMediaId.Location = new System.Drawing.Point(832, 1056);
+            this.imageMediaId.Location = new System.Drawing.Point(499, 264);
             this.imageMediaId.Margin = new System.Windows.Forms.Padding(6);
             this.imageMediaId.Name = "imageMediaId";
             this.imageMediaId.Size = new System.Drawing.Size(198, 31);
@@ -322,7 +328,7 @@
             // 
             // headerImageMedia
             // 
-            this.headerImageMedia.Location = new System.Drawing.Point(1046, 1056);
+            this.headerImageMedia.Location = new System.Drawing.Point(713, 264);
             this.headerImageMedia.Margin = new System.Windows.Forms.Padding(6);
             this.headerImageMedia.Name = "headerImageMedia";
             this.headerImageMedia.Size = new System.Drawing.Size(214, 31);
@@ -331,7 +337,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(826, 1019);
+            this.label6.Location = new System.Drawing.Point(493, 227);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(161, 25);
@@ -342,7 +348,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1040, 1019);
+            this.label7.Location = new System.Drawing.Point(707, 227);
             this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(211, 25);
@@ -352,7 +358,7 @@
             // paidContent
             // 
             this.paidContent.AutoSize = true;
-            this.paidContent.Location = new System.Drawing.Point(340, 1106);
+            this.paidContent.Location = new System.Drawing.Point(7, 314);
             this.paidContent.Margin = new System.Windows.Forms.Padding(6);
             this.paidContent.Name = "paidContent";
             this.paidContent.Size = new System.Drawing.Size(190, 29);
@@ -362,7 +368,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(1491, 850);
+            this.button7.Location = new System.Drawing.Point(1158, 58);
             this.button7.Margin = new System.Windows.Forms.Padding(6);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(202, 44);
@@ -374,7 +380,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1040, 1112);
+            this.label8.Location = new System.Drawing.Point(707, 320);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(206, 25);
@@ -383,7 +389,7 @@
             // 
             // secondaryMediaId
             // 
-            this.secondaryMediaId.Location = new System.Drawing.Point(1046, 1144);
+            this.secondaryMediaId.Location = new System.Drawing.Point(713, 352);
             this.secondaryMediaId.Margin = new System.Windows.Forms.Padding(6);
             this.secondaryMediaId.Name = "secondaryMediaId";
             this.secondaryMediaId.Size = new System.Drawing.Size(214, 31);
@@ -391,7 +397,7 @@
             // 
             // description
             // 
-            this.description.Location = new System.Drawing.Point(340, 1002);
+            this.description.Location = new System.Drawing.Point(7, 210);
             this.description.Margin = new System.Windows.Forms.Padding(6);
             this.description.Multiline = true;
             this.description.Name = "description";
@@ -401,7 +407,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(826, 1112);
+            this.label9.Location = new System.Drawing.Point(493, 320);
             this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(97, 25);
@@ -410,7 +416,7 @@
             // 
             // mediaId
             // 
-            this.mediaId.Location = new System.Drawing.Point(832, 1144);
+            this.mediaId.Location = new System.Drawing.Point(499, 352);
             this.mediaId.Margin = new System.Windows.Forms.Padding(6);
             this.mediaId.Name = "mediaId";
             this.mediaId.Size = new System.Drawing.Size(198, 31);
@@ -419,7 +425,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1270, 1019);
+            this.label10.Location = new System.Drawing.Point(937, 227);
             this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 25);
@@ -428,7 +434,7 @@
             // 
             // sessionId
             // 
-            this.sessionId.Location = new System.Drawing.Point(1276, 1055);
+            this.sessionId.Location = new System.Drawing.Point(943, 263);
             this.sessionId.Margin = new System.Windows.Forms.Padding(6);
             this.sessionId.Name = "sessionId";
             this.sessionId.Size = new System.Drawing.Size(198, 31);
@@ -437,7 +443,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(826, 912);
+            this.label11.Location = new System.Drawing.Point(493, 120);
             this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(93, 25);
@@ -447,7 +453,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(826, 962);
+            this.label12.Location = new System.Drawing.Point(493, 170);
             this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(66, 25);
@@ -457,7 +463,7 @@
             // variations
             // 
             this.variations.FormattingEnabled = true;
-            this.variations.Location = new System.Drawing.Point(1276, 1142);
+            this.variations.Location = new System.Drawing.Point(943, 350);
             this.variations.Margin = new System.Windows.Forms.Padding(6);
             this.variations.Name = "variations";
             this.variations.Size = new System.Drawing.Size(198, 33);
@@ -466,7 +472,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1270, 1112);
+            this.label13.Location = new System.Drawing.Point(937, 320);
             this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(108, 25);
@@ -476,7 +482,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(1619, 808);
+            this.label14.Location = new System.Drawing.Point(1764, 799);
             this.label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 25);
@@ -486,11 +492,11 @@
             // notes
             // 
             this.notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notes.Location = new System.Drawing.Point(1704, 808);
+            this.notes.Location = new System.Drawing.Point(1769, 830);
             this.notes.Margin = new System.Windows.Forms.Padding(6);
             this.notes.Multiline = true;
             this.notes.Name = "notes";
-            this.notes.Size = new System.Drawing.Size(906, 129);
+            this.notes.Size = new System.Drawing.Size(841, 107);
             this.notes.TabIndex = 44;
             // 
             // label15
@@ -580,14 +586,29 @@
             this.groupBox2.Controls.Add(this.autoMerge);
             this.groupBox2.Controls.Add(this.keepBackground);
             this.groupBox2.Controls.Add(this.keepMain);
-            this.groupBox2.Location = new System.Drawing.Point(1702, 948);
+            this.groupBox2.Location = new System.Drawing.Point(1767, 948);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(910, 250);
+            this.groupBox2.Size = new System.Drawing.Size(845, 262);
             this.groupBox2.TabIndex = 49;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Audio Settings";
+            // 
+            // beforeMerge
+            // 
+            this.beforeMerge.AutoSize = true;
+            this.beforeMerge.Location = new System.Drawing.Point(436, 165);
+            this.beforeMerge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.beforeMerge.Name = "beforeMerge";
+            this.beforeMerge.Size = new System.Drawing.Size(358, 29);
+            this.beforeMerge.TabIndex = 8;
+            this.beforeMerge.Text = "Adjust audio before merging files";
+            this.toolTip1.SetToolTip(this.beforeMerge, "Adjusting volume before the merge will allow you to have the \r\ntwo seperate files" +
+        " with audio already changed. \r\nThis takes significantly longer to process though" +
+        ".");
+            this.beforeMerge.UseVisualStyleBackColor = true;
+            this.beforeMerge.CheckedChanged += new System.EventHandler(this.beforeMerge_CheckedChanged);
             // 
             // label19
             // 
@@ -716,26 +737,75 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // beforeMerge
+            // button9
             // 
-            this.beforeMerge.AutoSize = true;
-            this.beforeMerge.Location = new System.Drawing.Point(436, 165);
-            this.beforeMerge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.beforeMerge.Name = "beforeMerge";
-            this.beforeMerge.Size = new System.Drawing.Size(358, 29);
-            this.beforeMerge.TabIndex = 8;
-            this.beforeMerge.Text = "Adjust audio before merging files";
-            this.toolTip1.SetToolTip(this.beforeMerge, "Adjusting volume before the merge will allow you to have the \r\ntwo seperate files" +
-        " with audio already changed. \r\nThis takes significantly longer to process though" +
-        ".");
-            this.beforeMerge.UseVisualStyleBackColor = true;
-            this.beforeMerge.CheckedChanged += new System.EventHandler(this.beforeMerge_CheckedChanged);
+            this.button9.Location = new System.Drawing.Point(1158, 109);
+            this.button9.Margin = new System.Windows.Forms.Padding(6);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(202, 95);
+            this.button9.TabIndex = 51;
+            this.button9.Text = "Copy Info To Clipboard";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.button9);
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.button3);
+            this.groupBox3.Controls.Add(this.button6);
+            this.groupBox3.Controls.Add(this.title);
+            this.groupBox3.Controls.Add(this.contentID);
+            this.groupBox3.Controls.Add(this.entityID);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.ordinalNumber);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.variations);
+            this.groupBox3.Controls.Add(this.body);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.subtext);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.subtextSecondary);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.imageMediaId);
+            this.groupBox3.Controls.Add(this.sessionId);
+            this.groupBox3.Controls.Add(this.headerImageMedia);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.mediaId);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.description);
+            this.groupBox3.Controls.Add(this.paidContent);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.button7);
+            this.groupBox3.Controls.Add(this.secondaryMediaId);
+            this.groupBox3.Location = new System.Drawing.Point(342, 808);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1418, 402);
+            this.groupBox3.TabIndex = 52;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Info";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(2420, 19);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(195, 42);
+            this.button10.TabIndex = 53;
+            this.button10.Text = "Get BearerID";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2672, 1509);
+            this.ClientSize = new System.Drawing.Size(2624, 1509);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.languages);
@@ -744,39 +814,8 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.notes);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.variations);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.sessionId);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.mediaId);
-            this.Controls.Add(this.description);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.secondaryMediaId);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.paidContent);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.headerImageMedia);
-            this.Controls.Add(this.imageMediaId);
-            this.Controls.Add(this.subtextSecondary);
-            this.Controls.Add(this.subtext);
-            this.Controls.Add(this.body);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.ordinalNumber);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.entityID);
-            this.Controls.Add(this.contentID);
-            this.Controls.Add(this.title);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
@@ -796,6 +835,8 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeUpDown)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -861,6 +902,9 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.CheckBox beforeMerge;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button10;
     }
 }
 
