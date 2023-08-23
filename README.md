@@ -39,4 +39,10 @@ In order to get your BearerID for authenticating with the headspace server follo
 
 3: Find any GET method that has the url api.prod.headspace.com
 
-4: Under the Request Headers table on the right hand side of the network sniffer find 'Authentication' and next to it you should see bearer and then a very long line of numbers and letters. Those numbers and letters are your BearerID. Simply copy and paste that into the corisponding box in HeadRipper and you're set!
+4: Under the Request Headers table on the right hand side of the network sniffer find 'authorization' and next to it you should see bearer and then a very long line of numbers and letters. Those numbers and letters are your BearerID. Simply copy and paste that into the corisponding box in HeadRipper and you're set!
+
+it looks something like this:
+`authorization: Bearer eyJhbG9sltnTMRenshaNeE3S...`
+But a lot longer. you want the part after "Bearer", so in this case: `eyJhbG9sltnTMRenshaNeE3S`.
+
+Keep in mind that you may want to view in "raw" (a small toggle in the request header part of the window) since the regular view may shorten the actual Bearer ID with a subtle "..." in the middle. 
