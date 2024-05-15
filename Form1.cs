@@ -69,7 +69,9 @@ namespace HeadRipper
 
         private void button4_Click(object sender, EventArgs e)
         {
-           string Category = meditate.Checked ? "MEDITATE" : "SLEEP";
+	        string Category = meditate.Checked ? "MEDITATE"
+		        : sleep.Checked ? "SLEEP"
+		        : "FOCUS";
            comboBox1.DataSource = hsAPI.ParseCategories(Category);
            if(comboBox1.Items.Count > 0)
            {
