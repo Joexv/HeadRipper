@@ -1,48 +1,22 @@
-#NOTE
-Looks like headspace changed how their clients interact witht he website. While not technically removing BearerIDs they did change how the website requires them to be formatted. As is the app wont work. Just needs a bit of TLC to get back up and running. If someone feels like doing so please do so. I currently dont have the time to atm.
-
-
-
-
 # HeadRipper
-Headspace Windows Downloader and Player
+Headspace Downloader
 
 # Why
 I'm not an a Headspace user, but I was dissapointed that you could not use a PC or even a web browser to listen to a majority of their library. 
 This program will allow me to bring access to those who want to try Headspace but either don't have a mobile device or don't have access to their device during the night.
 
-# Features
-Currently supports all 'Night' audio. Regular meditation and relaxation audios to be supported in the future. Sleepcasts, voice and background are mixed using FFMPEG into a single MP3.
-All other media is downloaded as AAC files.
-Audio is pulled using Headspace official servers using an official Headspace paid account.
-You CANNOT use this program for piracy as it requires a working current Bearer ID to authenticate with the server.
-This Bearer ID is unique to each account, and can easily be pulled by signing into Headspace on your web browser 
-and using web dev tools to view any JSON request sent to the server.
-Without this authentication you cannot use the program period. It just won't work.
+# Versions
 
-Currently, the program is contained in a single form, with a very basic audio player built in for ease of testing and checking media you download.
+## Browser Extensions
+Chrome and Firefox have dedicated extensions that will add a small button to Headspace to download whatever audio you have open. It will organize the files by title, and each file will have the narrator's name and audio length (if applicable)
 
-Headspace appears to change what voice/audio file Sleepcasts use on a daily basis. You can identify which audio you will get based on the Session ID.
-Some Wind Downs have multiple variations to their audio based on length of time, and narrator. These can be selected via a drop down box. Currently they are labeled as just a numerical ID, in the future these will idealy be labeled properly with narrator information and length of the audio.
+[Download From FireFox AddOns](https://addons.mozilla.org/en-US/firefox/addon/headripper/?utm_source=joexv.github.io) || Chrome Store Awaiting Approval
+
 
 # Disclaimer
 By making this program I am not promoting piracy or stealing of content from Headspace. 
 They truely believe in what they create and that should be supported for making a service that helps
-many many people every day.
+many many people every day. Nothing in this program allows a person to access content they do not have explicit permissions to access!
 
 # Bearer ID
-In order to get your BearerID for authenticating with the headspace server follow the below instructions:
-
-1: In a web browser that has developer tools (such as FireFox or Google Chrome), navigate to https://headspace.com/ and sign in with a valid account
-
-2: Open up the network traffic view (In FireFox this is CRTL-Shift-E)
-
-3: Find any GET method that has the url api.prod.headspace.com
-
-4: Under the Request Headers table on the right hand side of the network sniffer find 'authorization' and next to it you should see bearer and then a very long line of numbers and letters. Those numbers and letters are your BearerID. Simply copy and paste that into the corisponding box in HeadRipper and you're set!
-
-it looks something like this:
-`authorization: Bearer eyJhbG9sltnTMRenshaNeE3S...`
-But a lot longer. you want the part after "Bearer", so in this case: `eyJhbG9sltnTMRenshaNeE3S`.
-
-Keep in mind that you may want to view in "raw" (a small toggle in the request header part of the window) since the regular view may shorten the actual Bearer ID with a subtle "..." in the middle. 
+You will notice in a few places a BearerID mentioned. This is the authentication key that Headspace uses to make sure you are a registered user and you have the rights to the media you are listening to! Headripper will read this BearerID to formulate it's API requests, but it does not track or send this anywhere except Headspace directly.
