@@ -93,8 +93,8 @@ Because tokens expire daily, this is the recommended flow:
 
 ---
 
-## Advanced Notes
-
+## Notes
+- I haven't extensively tested varients of audio tracks (length, author, etc) there may be bugs with it but yolo
 - If you see `401 Unauthorized`, it almost always means your Bearer token expired. Re-run `Browser_Login.py`.
 - `Headripper.py` uses Headspace’s own API endpoints and mirrors their iOS client headers for reliability.
 - The downloader script reuses the same authentication and headers, so no extra configuration is needed.
