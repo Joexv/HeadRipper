@@ -48,7 +48,7 @@ Chrome and Firefox have dedicated extensions that will add a small button to Hea
 The main script collects category and item data and saves it into local JSON viewmodel files for later use.
 
 ```bash
-python Headripper.py --location SLEEP --all-topics --client ios
+python Headripper.py --location SLEEP --all-topics
 ```
 
 Options:
