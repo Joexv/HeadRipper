@@ -31,6 +31,7 @@ Chrome and Firefox have dedicated extensions that will add a small button to Hea
 3. Run the login helper to capture your Bearer token:
 
    ```bash
+   cd PythonScript
    python Browser_Login.py
    ```
 
