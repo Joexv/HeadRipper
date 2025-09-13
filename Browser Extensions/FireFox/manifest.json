@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+  "name": "Headripper",
+  "version": "1.0.0",
+  "description": "Download Headspace audio directly.",
+  "permissions": [
+    "*://*.cloudfront.net/*",
+    "activeTab",
+    "alarms",
+    "downloads",
+    "https://api.prod.headspace.com/*",
+    "https://my.headspace.com/*",
+    "https://www.headspace.com/*",
+    "storage",
+    "webRequest"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.headspace.com/*",
+        "https://www.headspace.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Headripper"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "headripper@cheesiest.dev",
+      "strict_min_version": "102.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  }
+}
