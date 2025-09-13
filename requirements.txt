@@ -1,0 +1,6 @@
+requests
+playwright
+python-dotenv
+keyring
+colorama
+tqdm
