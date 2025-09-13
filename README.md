@@ -102,7 +102,8 @@ Because tokens expire daily, this is the recommended flow:
 - The viewmodel JSONs are rich: they contain item metadata, durations, narrators, and IDs. You can extend the downloader to include this information in file naming or logs.
 - For experimentation, you can run with `--client web` instead of `--client ios`, but `ios` tends to give the most consistent results.
 
-
+## Big Kudos
+to komali2, if he hadn't made that python script I likely never would've come back to this.
 
 # Disclaimer
 By making this program I am not promoting piracy or stealing of content from Headspace. 
