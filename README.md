@@ -31,6 +31,7 @@ Chrome and Firefox have dedicated extensions that will add a small button to Hea
 3. Run the login helper to capture your Bearer token:
 
    ```bash
+   cd PythonScript
    python Browser_Login.py
    ```
 
@@ -47,7 +48,7 @@ Chrome and Firefox have dedicated extensions that will add a small button to Hea
 The main script collects category and item data and saves it into local JSON viewmodel files for later use.
 
 ```bash
-python Headripper.py --location SLEEP --all-topics --client ios
+python Headripper.py --location SLEEP --all-topics
 ```
 
 Options:
@@ -92,8 +93,8 @@ Because tokens expire daily, this is the recommended flow:
 
 ---
 
-## Advanced Notes
-
+## Notes
+- I haven't extensively tested varients of audio tracks (length, author, etc) there may be bugs with it but yolo
 - If you see `401 Unauthorized`, it almost always means your Bearer token expired. Re-run `Browser_Login.py`.
 - `Headripper.py` uses Headspace’s own API endpoints and mirrors their iOS client headers for reliability.
 - The downloader script reuses the same authentication and headers, so no extra configuration is needed.
@@ -101,7 +102,8 @@ Because tokens expire daily, this is the recommended flow:
 - The viewmodel JSONs are rich: they contain item metadata, durations, narrators, and IDs. You can extend the downloader to include this information in file naming or logs.
 - For experimentation, you can run with `--client web` instead of `--client ios`, but `ios` tends to give the most consistent results.
 
-
+## Big Kudos
+to komali2, if he hadn't made that python script I likely never would've come back to this.
 
 # Disclaimer
 By making this program I am not promoting piracy or stealing of content from Headspace. 
