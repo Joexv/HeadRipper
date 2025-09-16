@@ -2,6 +2,8 @@
 from __future__ import annotations
 from typing import Any, Dict, Iterable, List
 import hashlib, re
+import requests
+from datetime import date
 
 AUDIO_EXT = (".mp3", ".m4a", ".aac", ".wav", ".flac", ".ogg")
 HLS_HINTS = ("m3u8", "application/vnd.apple.mpegurl")
@@ -124,6 +126,55 @@ def extract_variants(detail_json: Dict[str, Any], content_id: str | int) -> List
         seen.add(key)
         uniq.append(v)
     return uniq
+
+
+# headspace_variants.py
+
+def fetch_sleepcast_variants_v3(content_id: str | int, headers: dict, *,
+                                date_override: str | None = None,
+                                include_split: bool = False) -> list[dict]:
+    """
+    Fetch Sleepcast variants (VOICE, AMBIENCE, MIXED) from the v3 playable-assets endpoint.
+    - date_override: string 'YYYY-MM-DD'. Defaults to today.
+    - include_split: if True, return VOICE + AMBIENCE + MIXED. If False, return MIXED only.
+    """
+    from datetime import date
+    target_date = date_override or date.today().isoformat()
+
+    url = (f"https://api.prod.headspace.com/content-interface/v3/playable-assets"
+           f"?contentId={content_id}&date={target_date}&parentContentId=&audioDescriptionEnabled=false")
+    print(url)
+    input("Press Enter to continue...")
+    resp = requests.get(url, headers=headers)
+    if not resp.ok:
+        raise RuntimeError(f"[err] v3 playable-assets failed for {content_id}: {resp.status_code}")
+    data = resp.json()
+    print(data)
+    input("Press Enter to continue...")
+    variants = []
+    for entry in data:
+        mid = entry.get("mediaItemId")
+        vid = entry.get("id")            # e.g. "SC-408-VOICE-73313"
+        track_type = (entry.get("metadata") or {}).get("trackType") or "UNKNOWN"
+
+        print(f"v3 MediaID = {mid}")
+        if not mid:
+            continue
+
+        # Only include Mixed if include_split=False
+        if not include_split and track_type.upper() != "MIXED":
+            continue
+
+        variants.append({
+            "id": vid,   # keep original id for naming
+            "mediaId": str(mid),
+            "role": track_type.lower(),
+            "duration": entry.get("duration", {}).get("durationInMins"),
+            "title": (entry.get("analyticsData") or {}).get("content_name") or f"Sleepcast {content_id}",
+            "url": f"https://api.prod.headspace.com/content-aggregation/v1/content/media-items/{mid}/download?container=mp3",
+        })
+    return variants
+
 
 def extract_sleepcast_variants(info_json: dict, entity_id: str | int) -> list[dict]:
     """

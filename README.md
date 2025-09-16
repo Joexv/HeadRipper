@@ -59,7 +59,7 @@ Options:
 
 You can also specify `--topic-id` to only fetch a single category instead of all of them.
 
-### Step 2 – Download Audio
+#### Step 2 – Download Audio
 
 Once you’ve built catalogs, use the downloader to pick and save audio files.
 
@@ -69,11 +69,11 @@ python Download_Audio.py
 
 This interactive mode will:
 
-- Show you only the locations and topics that have viewmodels available in `Saved/`.
-- Let you pick a topic, then list all audio items in that topic.
-- Save the chosen track to `Saved/Audio/[Location]/[Category]/[Title-Author-Length].mp3`.
+* Show you only the locations and topics that have viewmodels available in `Saved/`.
+* Let you pick a topic, then list all audio items in that topic.
+* Save the chosen track to `Saved/Audio/[Location]/[Category]/[Title-Author-Length].mp3`.
 
-For automation or scripting, you can skip the menus:
+For automation or scripting:
 
 ```bash
 python Download_Audio.py --location SLEEP --topic-id 41 --container mp3
@@ -82,6 +82,38 @@ python Download_Audio.py --location SLEEP --topic-id 41 --container mp3
 This will parse the matching viewmodel file and download all tracks in that topic automatically.
 
 ---
+
+###  Sleepcasts
+
+Sleepcasts are now supported through the **v3 playable-assets API**.
+They can provide up to **three separate audio streams** per episode:
+
+* `VOICE` (narration only)
+* `AMBIENCE` (background sounds only)
+* `MIXED` (final combined track)
+
+By default, only the **MIXED** track is downloaded.
+You can change this with new arguments:
+
+```bash
+python Download_Audio.py --sleepcast --all-tracks
+```
+
+Options:
+
+* `--sleepcast` → Use the v3 playable-assets flow.
+* `--date YYYY-MM-DD` → Override the playback date (default: today).
+  (Headspace serves different mixes depending on the date.)
+* `--all-tracks` → Download VOICE, AMBIENCE, and MIXED.
+* `--mixed-only` → Download only the mixed track (default).
+
+Each track is saved with its Name and ID as the filename, e.g.:
+
+```
+Compass Garden SC-408-MIXED-73320.mp3
+Compass Garden SC-408-VOICE-73317.mp3
+Compass Garden SC-408-AMBIENCE-73318.mp3
+```
 
 ## Daily Workflow
 
@@ -95,12 +127,11 @@ Because tokens expire daily, this is the recommended flow:
 
 ## Notes
 - I haven't extensively tested varients of audio tracks (length, author, etc) there may be bugs with it but yolo
+- Sleepcast support is experimental but uses the same auth + headers as the mobile app.
 - If you see `401 Unauthorized`, it almost always means your Bearer token expired. Re-run `Browser_Login.py`.
-- `Headripper.py` uses Headspace’s own API endpoints and mirrors their iOS client headers for reliability.
-- The downloader script reuses the same authentication and headers, so no extra configuration is needed.
-- You can build automation around `Download_Audio.py` by passing arguments in a shell script or scheduled task.
-- The viewmodel JSONs are rich: they contain item metadata, durations, narrators, and IDs. You can extend the downloader to include this information in file naming or logs.
-- For experimentation, you can run with `--client web` instead of `--client ios`, but `ios` tends to give the most consistent results.
+- Large files (Sleepcasts) now show download progress.
+- `Headripper.py` mirrors Android headers for reliability, but Android headers are REQUIRED for Sleepcasts.
+- The viewmodel JSONs are rich: you can extend the downloader to include narrator info, durations, etc.
 
 ## Big Kudos
 to komali2, if he hadn't made that python script I likely never would've come back to this.
