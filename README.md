@@ -1,17 +1,17 @@
 # HeadRipper
 Headripper is a set of tools (Python scripts + browser extensions) that let you download and organize audio from Headspace for offline use. It works by authenticating with your normal Headspace account and mirroring the same API calls that the mobile apps use.
 
-## Browser Extensions (Chrome/Firefox): Add a download button directly inside the Headspace site.
+Browser Extensions (Chrome/Firefox): Add a download button directly inside the Headspace site.
 
-## Python Scripts: Automate catalog building and batch audio downloads on desktop.
+Python Scripts: Automate catalog building and batch audio downloads on desktop.
 
-## Sleepcast Support: Full v3 API integration for Headspace Sleepcasts, with options to grab the Mixed track only (default) or all three components (Voice, Ambience, Mixed).
+Sleepcast Support: Full v3 API integration for Headspace Sleepcasts, with options to grab the Mixed track only (default) or all three components (Voice, Ambience, Mixed).
 
-## Cross-Platform: Works on Windows, macOS, and Linux.
+Cross-Platform: Works on Windows, macOS, and Linux.
 
-## Secure: Uses your own Bearer token — nothing is sent anywhere except Headspace’s servers.
+Secure: Uses your own Bearer token — nothing is sent anywhere except Headspace’s servers.
 
-## The goal of Headripper isn’t piracy — it’s about giving paying Headspace users the freedom to listen on devices and workflows that Headspace itself doesn’t officially support.
+The goal of Headripper isn’t piracy — it’s about giving paying Headspace users the freedom to listen on devices and workflows that Headspace itself doesn’t officially support.
 
 # Why
 I'm not an a Headspace user, but I was dissapointed that you could not use a PC or even a web browser to listen to a majority of their library. 
