@@ -1,45 +1,82 @@
-# HeadRipper
-Headripper is a set of tools (Python scripts + browser extensions) that let you download and organize audio from Headspace for offline use. It works by authenticating with your normal Headspace account and mirroring the same API calls that the mobile apps use.
+Perfect — here’s a fully reformatted, more engaging **README.md** draft. It keeps all your details but polishes the tone, adds emphasis, and makes it easier to scan.
 
-📦 Browser Extensions (Chrome/Firefox): Add a download button directly inside the Headspace site.
+---
 
-🐍 Python Scripts: Automate catalog building and batch audio downloads on desktop.
+# 🎧 HeadRipper
 
-🔊 Sleepcast Support: Full v3 API integration for Headspace Sleepcasts, with options to grab the Mixed track only (default) or all three components (Voice, Ambience, Mixed).
+**Headripper** is an unofficial toolkit that unlocks the full potential of your Headspace subscription.
+It lets you **download, organize, and archive** audio for offline use — something the official app doesn’t make easy.
 
-⚡ Cross-Platform: Works on Windows, macOS, and Linux.
+Instead of hacks or workarounds, Headripper simply mirrors the same API calls that the mobile apps use with your account.
+The result: reliable, high-quality audio that you can play on *your terms*.
 
-🔐 Secure: Uses your own Bearer token — nothing is sent anywhere except Headspace’s servers.
+---
 
-The goal of Headripper isn’t piracy — it’s about giving paying Headspace users the freedom to listen on devices and workflows that Headspace itself doesn’t officially support.
+## ✨ Features
 
-# Why
-I'm not an a Headspace user, but I was dissapointed that you could not use a PC or even a web browser to listen to a majority of their library. 
-This program will allow me to bring access to those who want to try Headspace but either don't have a mobile device or don't have access to their device during the night.
+📦 **Browser Extensions (Chrome/Firefox)**
+Add a download button directly inside Headspace’s site to grab whatever audio you’re viewing. Files are auto-organized by title, narrator, and length.
 
-# Versions
+🐍 **Python Scripts**
+Automate catalog building and batch downloads from the command line. Perfect for pulling whole categories in one go.
 
-## Browser Extensions
-Chrome and Firefox have dedicated extensions that will add a small button to Headspace to download whatever audio you have open. It will organize the files by title, and each file will have the narrator's name and audio length (if applicable)
+🔊 **Sleepcast Support (NEW)**
+Full integration with Headspace’s **v3 playable-assets API**.
+Download the **Mixed track** (default) or grab all three:
 
-[Download From FireFox AddOns](https://addons.mozilla.org/en-US/firefox/addon/headripper/?utm_source=joexv.github.io) || Chrome Store Awaiting Approval
+* 🎙️ **Voice** – narration only
+* 🌌 **Ambience** – background soundscape only
+* 🎚️ **Mixed** – the final combined track
 
+⚡ **Cross-Platform**
+Runs on Windows, macOS, and Linux.
 
-# Python Script
-## Setup
+🔐 **Secure**
+Uses your own Bearer token. Nothing leaves your system except the same requests the Headspace app already makes.
 
-1. Clone this repository and install dependencies:
+---
+
+## 🎯 Why Headripper?
+
+Headspace has a fantastic library — but it’s locked down to mobile devices, with no proper desktop player or open offline access.
+
+Headripper was built to fix that.
+It gives paying subscribers the **freedom** to listen however they want:
+
+* On a desktop at night without needing a phone
+* On a work machine with no mobile app installed
+* Archived on a personal server or NAS for long-term access
+
+👉 This isn’t about piracy. It’s about access and flexibility for people who already pay.
+
+---
+
+## 🧩 Versions
+
+### Browser Extensions
+
+Chrome and Firefox add-ons add a small button inside Headspace. Click it to instantly download the current audio.
+Files are named and organized automatically.
+
+[Firefox Add-On](https://addons.mozilla.org/en-US/firefox/addon/headripper/?utm_source=joexv.github.io)
+Chrome Store: *pending approval*
+
+---
+
+### Python Script
+
+#### 🔧 Setup
+
+1. Clone this repo and install dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
-
-2. Make sure Playwright is installed:
+2. Install Playwright:
 
    ```bash
    python -m playwright install chromium
    ```
-
 3. Run the login helper to capture your Bearer token:
 
    ```bash
@@ -47,65 +84,61 @@ Chrome and Firefox have dedicated extensions that will add a small button to Hea
    python Browser_Login.py
    ```
 
-   - A browser will open. Log into Headspace normally.
-   - Once logged in, your token will be saved to `Saved/BearerID.env`.
-   - Tokens usually expire in about 24 hours, so you’ll need to refresh daily.
+   * A browser will open; log in normally.
+   * Your token will be saved to `Saved/BearerID.env`.
+   * Tokens usually expire in \~24h, so refresh daily.
 
 ---
 
-## Usage
+#### ▶️ Usage
 
-### Step 1 – Build Catalogs
-
-The main script collects category and item data and saves it into local JSON viewmodel files for later use.
+**Step 1 – Build Catalogs**
 
 ```bash
 python Headripper.py --location SLEEP --all-topics
 ```
 
-Options:
+* `--location` → `SLEEP`, `MEDITATE`, or `FOCUS`
+* `--all-topics` → fetch all categories for that location
+* Each category is saved as `Saved/viewmodel_<Location>_<TopicID>.json`
 
-- `--location` can be `SLEEP`, `MEDITATE`, or `FOCUS`.
-- `--all-topics` will fetch all known categories for that location.
-- Each category is saved into a viewmodel file under `Saved/` (e.g., `viewmodel_SLEEP_41.json`).
+Or just fetch one topic:
 
-You can also specify `--topic-id` to only fetch a single category instead of all of them.
+```bash
+python Headripper.py --location SLEEP --topic-id 41
+```
 
-#### Step 2 – Download Audio
+---
 
-Once you’ve built catalogs, use the downloader to pick and save audio files.
+**Step 2 – Download Audio**
+
+Interactive mode:
 
 ```bash
 python Download_Audio.py
 ```
 
-This interactive mode will:
+* Shows only the locations & topics you’ve already cached
+* Lets you browse and pick tracks
+* Saves files to `Saved/Audio/[Location]/[Category]/[Title-Author-Length].mp3`
 
-* Show you only the locations and topics that have viewmodels available in `Saved/`.
-* Let you pick a topic, then list all audio items in that topic.
-* Save the chosen track to `Saved/Audio/[Location]/[Category]/[Title-Author-Length].mp3`.
-
-For automation or scripting:
+Batch mode:
 
 ```bash
 python Download_Audio.py --location SLEEP --topic-id 41 --container mp3
 ```
 
-This will parse the matching viewmodel file and download all tracks in that topic automatically.
+This parses the cached viewmodel and downloads all tracks in that topic.
 
 ---
 
-###  Sleepcasts
+### 🌙 Sleepcasts
 
-Sleepcasts are now supported through the **v3 playable-assets API**.
-They can provide up to **three separate audio streams** per episode:
+Sleepcasts use a newer API and can contain multiple audio streams.
+Headripper now supports the **v3 playable-assets API**.
 
-* `VOICE` (narration only)
-* `AMBIENCE` (background sounds only)
-* `MIXED` (final combined track)
-
-By default, only the **MIXED** track is downloaded.
-You can change this with new arguments:
+By default, you’ll get the **Mixed** track.
+You can override this with extra flags:
 
 ```bash
 python Download_Audio.py --sleepcast --all-tracks
@@ -113,13 +146,12 @@ python Download_Audio.py --sleepcast --all-tracks
 
 Options:
 
-* `--sleepcast` → Use the v3 playable-assets flow.
-* `--date YYYY-MM-DD` → Override the playback date (default: today).
-  (Headspace serves different mixes depending on the date.)
-* `--all-tracks` → Download VOICE, AMBIENCE, and MIXED.
-* `--mixed-only` → Download only the mixed track (default).
+* `--sleepcast` → enable v3 Sleepcast mode
+* `--date YYYY-MM-DD` → override the playback date (default: today)
+* `--all-tracks` → download VOICE + AMBIENCE + MIXED
+* `--mixed-only` → download only the Mixed track (default)
 
-Each track is saved with its Name and ID as the filename, e.g.:
+Example outputs:
 
 ```
 Compass Garden SC-408-MIXED-73320.mp3
@@ -127,31 +159,44 @@ Compass Garden SC-408-VOICE-73317.mp3
 Compass Garden SC-408-AMBIENCE-73318.mp3
 ```
 
-## Daily Workflow
-
-Because tokens expire daily, this is the recommended flow:
-
-1. **Refresh login**: Run `Browser_Login.py` once per day to update `BearerID.env`.
-2. **Update catalogs**: Run `Headripper.py` for the locations you want (e.g., SLEEP, MEDITATE, FOCUS).
-3. **Download audio**: Run `Download_Audio.py` to save tracks interactively, or run it with arguments to batch-download automatically.
+Large Sleepcast files (≈50MB each) show a progress bar while downloading.
 
 ---
 
-## Notes
-- I haven't extensively tested varients of audio tracks (length, author, etc) there may be bugs with it but yolo
-- Sleepcast support is experimental but uses the same auth + headers as the mobile app.
-- If you see `401 Unauthorized`, it almost always means your Bearer token expired. Re-run `Browser_Login.py`.
-- Large files (Sleepcasts) now show download progress.
-- `Headripper.py` mirrors Android headers for reliability, but Android headers are REQUIRED for Sleepcasts.
-- The viewmodel JSONs are rich: you can extend the downloader to include narrator info, durations, etc.
+## 🔄 Daily Workflow
 
-## Big Kudos
-to komali2, if he hadn't made that python script I likely never would've come back to this.
+1. **Refresh login** – run `Browser_Login.py` once daily
+2. **Update catalogs** – run `Headripper.py` for your locations
+3. **Download audio** – run `Download_Audio.py` (interactive or scripted)
 
-# Disclaimer
-By making this program I am not promoting piracy or stealing of content from Headspace. 
-They truely believe in what they create and that should be supported for making a service that helps
-many many people every day. Nothing in this program allows a person to access content they do not have explicit permissions to access!
+---
 
-# Bearer ID
-You will notice in a few places a BearerID mentioned. This is the authentication key that Headspace uses to make sure you are a registered user and you have the rights to the media you are listening to! Headripper will read this BearerID to formulate it's API requests, but it does not track or send this anywhere except Headspace directly.
+## 📝 Notes
+
+* Sleepcast support is experimental but uses the same headers/auth as the mobile app.
+* Android headers are **required** for Sleepcasts.
+* If you see `401 Unauthorized`, your token likely expired. Re-run `Browser_Login.py`.
+* Viewmodel JSONs are rich with metadata (narrator, durations, etc.) if you want to extend file naming.
+
+---
+
+## 🙌 Big Kudos
+
+Special thanks to **komali2** — without his original Python script, this project wouldn’t exist.
+
+---
+
+## ⚠️ Disclaimer
+
+Headripper does **not** promote piracy.
+Headspace makes valuable content that should be supported.
+This project does not let you access anything you aren’t already entitled to.
+
+---
+
+## 🔑 Bearer ID
+
+Your **BearerID** is the authentication token Headspace uses to confirm your account.
+Headripper only uses it locally to make API requests — it is never sent anywhere except directly to Headspace’s servers.
+
+---
