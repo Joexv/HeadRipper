@@ -1,6 +1,4 @@
----
-
-# HeadRipper
+# Headripper
 
 **Headripper** is an unofficial toolkit that unlocks the full potential of your Headspace subscription.
 It lets you **download, organize, and archive** audio for offline use — something the official app doesn’t make easy.
