@@ -1,5 +1,3 @@
-Perfect — here’s a fully reformatted, more engaging **README.md** draft. It keeps all your details but polishes the tone, adds emphasis, and makes it easier to scan.
-
 ---
 
 # 🎧 HeadRipper
