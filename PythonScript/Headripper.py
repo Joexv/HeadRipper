@@ -483,6 +483,7 @@ def main() -> int:
     ap.add_argument("--debug-http", action="store_true", help="Verbose HTTP debug (sets HR_DEBUG_HTTP=1)")
 
     args = ap.parse_args()
+    args.location = args.location.strip().upper()
 
     if args.debug_http:
         os.environ["HR_DEBUG_HTTP"] = "1"

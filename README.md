@@ -160,28 +160,48 @@ This parses the cached viewmodel and downloads all tracks in that topic.
 ### 🌙 Sleepcasts
 
 Sleepcasts use a newer API and can contain multiple audio streams.
-Headripper now supports the **v3 playable-assets API**.
+Headripper supports the **v3 playable-assets API**.
 
-By default, you’ll get the **Mixed** track.
-You can override this with extra flags:
+Sleepcasts are selected from the cached Sleepcasts topic like other audio. The `--sleepcast` flag explicitly enables the v3 playable-assets API.
+
+To download one specific sleepcast non-interactively:
 
 ```bash
-python Download_Audio.py --sleepcast --all-tracks
+python Download_Audio.py --location sleep --topic-id 41 --item 116
 ```
+
+`--item` accepts either the 1-based number shown in the topic list or the exact sleepcast title. For example, these select the same item when item 116 is `Treehouse`:
+
+```bash
+python Download_Audio.py --location sleep --topic-id 41 --item 116
+python Download_Audio.py --location sleep --topic-id 41 --item "Treehouse"
+```
+
+Title matching is case-insensitive. The command downloads the Mixed track by default. Use the interactive mode when you do not know the item number or title:
+
+```bash
+python Download_Audio.py
+```
+
+Choose `SLEEP`, the `Sleepcasts` topic (topic id `41`), and then the sleepcast you want.
 
 Options:
 
+* `--location` → `SLEEP`, `MEDITATE`, or `FOCUS`; location names are case-insensitive
+* `--topic-id 41` → select the cached Sleepcasts topic
+* `--item 116` → select one cached sleepcast by its 1-based number or title; `--title` is retained as an alias
 * `--sleepcast` → enable v3 Sleepcast mode
-* `--date YYYY-MM-DD` → override the playback date (default: today)
-* `--all-tracks` → download VOICE + AMBIENCE + MIXED
+* `--date YYYY-MM-DD` → override the playback date (default: today); `--sleep-date` is an alias
+* `--all-tracks` → download VOICE + AMBIENCE + MIXED; `--include-split` is an alias
 * `--mixed-only` → download only the Mixed track (default)
+* `--variant manual` → choose one returned audio variant interactively
 
 Example outputs:
 
 ```
-Compass Garden SC-408-MIXED-73320.mp3
-Compass Garden SC-408-VOICE-73317.mp3
-Compass Garden SC-408-AMBIENCE-73318.mp3
+Compass Garden-SC-408-MIXED-73320.mp3
+Compass Garden-SC-408-VOICE-73317.mp3
+Compass Garden-SC-408-AMBIENCE-73318.mp3
 ```
 
 Large Sleepcast files (≈50MB each) show a progress bar while downloading.

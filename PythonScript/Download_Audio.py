@@ -63,6 +63,20 @@ def load_bearer():
     return None
 
 
+def normalize_location(value):
+    return value.strip().upper()
+
+
+def select_item(items, selector):
+    if not selector:
+        return items
+    if selector.isdigit():
+        index = int(selector) - 1
+        return items[index:index + 1] if 0 <= index < len(items) else []
+    requested_title = selector.casefold()
+    return [item for item in items if (item.get("title") or "").casefold() == requested_title]
+
+
 def list_locations():
     found = set()
     for f in SAVE_DIR.glob("viewmodel_*.json"):
@@ -226,12 +240,23 @@ def download_audio(cid, out_path, headers, container="mp3", url = ""):
 
 def parse_args():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--location", choices=["SLEEP", "MEDITATE", "FOCUS"])
+    ap.add_argument("--location", type=normalize_location, choices=["SLEEP", "MEDITATE", "FOCUS"])
     ap.add_argument("--topic-id")
+    ap.add_argument("--item", "--title", dest="item",
+                    help="Download one cached item by its 1-based number or exact title")
+    ap.add_argument("--sleepcast", action="store_true",
+                    help="Use the v3 Sleepcast playable-assets API")
     ap.add_argument("--container", choices=["mp3", "aac"], default="mp3")
     ap.add_argument("--variant", choices=["auto", "manual"], default="auto")
-    ap.add_argument("--sleep-date", help="SLEEPCASTS ONLY - Override date for sleepcast version (YYYY-MM-DD)")
-    ap.add_argument("--include-split", action="store_true", help="SLEEPCASTS ONLY - Download voice+ambience+mixed instead of mixed only")
+    ap.add_argument("--sleep-date", "--date", dest="sleep_date",
+                    help="SLEEPCASTS ONLY - Override date for sleepcast version (YYYY-MM-DD)")
+    tracks = ap.add_mutually_exclusive_group()
+    tracks.add_argument("--all-tracks", "--include-split", dest="include_split",
+                        action="store_true",
+                        help="SLEEPCASTS ONLY - Download voice+ambience+mixed")
+    tracks.add_argument("--mixed-only", dest="include_split", action="store_false",
+                        help="SLEEPCASTS ONLY - Download only the mixed track (default)")
+    ap.set_defaults(include_split=False)
     return ap.parse_args()
 
 def interactive_flow(args):
@@ -244,6 +269,11 @@ def interactive_flow(args):
     with open(vm_file, encoding="utf-8") as f:
         data = json.load(f)
     items = parse_items_from_viewmodel(data)
+    if args.item:
+        items = select_item(items, args.item)
+        if not items:
+            print(f"No item matching {args.item!r} found in this topic.")
+            return
     if not items:
         print("No items found in this topic.")
         return
@@ -265,9 +295,9 @@ def interactive_flow(args):
     out_dir = AUDIO_DIR / location / folder
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    if item["category"] and item["category"] .upper() == "SLEEPCAST":
+    if args.sleepcast or (item["category"] and item["category"].upper() == "SLEEPCAST"):
             variants = fetch_variants(item["contentId"], headers,
-                            content_type=item.get("category") or "None",
+                            content_type="SLEEPCAST",
                             args=args)
     else:
         variants = fetch_variants(item["entityId"], headers,
@@ -324,6 +354,11 @@ def main():
         data = json.load(f)
 
     items = parse_items_from_viewmodel(data)
+    if args.item:
+        items = select_item(items, args.item)
+        if not items:
+            print(f"No item matching {args.item!r} found in this topic.")
+            return
     if not items:
         print("No items found in this topic.")
         return
@@ -338,9 +373,9 @@ def main():
         out_dir = AUDIO_DIR / args.location / folder
         out_dir.mkdir(parents=True, exist_ok=True)
 
-        if item.get("category") and item.get("category").upper() == "SLEEPCAST":
+        if args.sleepcast or (item.get("category") and item.get("category").upper() == "SLEEPCAST"):
             variants = fetch_variants(item.get("contentId"), headers,
-                                      content_type=item.get("category") or "None",
+                                      content_type="SLEEPCAST",
                                       args=args)
         else:
             variants = fetch_variants(item.get("entityId"), headers,
