@@ -8,46 +8,46 @@ The result: reliable, high-quality audio that you can play on *your terms*.
 
 ---
 
-## ✨ Features
+## Features
 
-📦 **Browser Extensions (Chrome/Firefox)**
+**Browser Extensions (Chrome/Firefox)**
 Add a download button directly inside Headspace’s site to grab whatever audio you’re viewing. Files are auto-organized by title, narrator, and length.
 
-🐍 **Python Scripts**
+**Python Scripts**
 Automate catalog building and batch downloads from the command line. Perfect for pulling whole categories in one go.
 
-🔊 **Sleepcast Support (NEW)**
-Full integration with Headspace’s **v3 playable-assets API**.
+**Sleepcast Support (NEW)**
+Full integration with Headspace’s newer v3 API.
 Download the **Mixed track** (default) or grab all three:
 
-* 🎙️ **Voice** – narration only
-* 🌌 **Ambience** – background soundscape only
-* 🎚️ **Mixed** – the final combined track
+* **Voice** – narration only
+* **Ambience** – background soundscape only
+* **Mixed** – the final combined track
 
-⚡ **Cross-Platform**
+**Cross-Platform**
 Runs on Windows, macOS, and Linux.
 
-🔐 **Secure**
-Uses your own Bearer token. Nothing leaves your system except the same requests the Headspace app already makes.
+**Secure**
+Uses your own Bearer token directly with Headspace. Nothing leaves your system except the same requests the Headspace app already makes through your browser.
 
 ---
 
-## 🎯 Why Headripper?
+## Why Headripper?
 
 Headspace has a fantastic library — but it’s locked down to mobile devices, with no proper desktop player or open offline access.
 
 Headripper was built to fix that.
-It gives paying subscribers the **freedom** to listen however they want:
+It gives paying subscribers the freedom to listen however they want:
 
 * On a desktop at night without needing a phone
 * On a work machine with no mobile app installed
 * Archived on a personal server or NAS for long-term access
 
-👉 This isn’t about piracy. It’s about access and flexibility for people who already pay.
+This isn’t for piracy. It’s about access and flexibility for people who already pay.
 
 ---
 
-## 🧩 Versions
+## Versions
 
 ### Browser Extensions
 
@@ -61,7 +61,7 @@ Chrome Store: *pending approval*
 
 ### Python Script
 
-#### 🔧 Setup
+#### Setup
 
 1. Clone this repo and install dependencies:
 
@@ -115,7 +115,7 @@ Chrome Store: *pending approval*
 
 ---
 
-#### ▶️ Usage
+#### Usage
 
 **Step 1 – Build Catalogs**
 
@@ -155,9 +155,18 @@ python Download_Audio.py --location SLEEP --topic-id 41 --container mp3
 
 This parses the cached viewmodel and downloads all tracks in that topic.
 
+To download one specific item from any cached topic, add `--item`. It accepts either the 1-based number shown by the interactive picker or the exact title, case-insensitively:
+
+```bash
+python Download_Audio.py --location SLEEP --topic-id 42 --item 1
+python Download_Audio.py --location SLEEP --topic-id 42 --item "Item title"
+```
+
+This works for regular audio such as sleep music, wind downs, and soundscapes as well as Sleepcasts. Omit `--sleepcast` for regular audio; it uses the standard variants API.
+
 ---
 
-### 🌙 Sleepcasts
+### Sleepcasts
 
 Sleepcasts use a newer API and can contain multiple audio streams.
 Headripper supports the **v3 playable-assets API**.
@@ -170,7 +179,7 @@ To download one specific sleepcast non-interactively:
 python Download_Audio.py --location sleep --topic-id 41 --item 116
 ```
 
-`--item` accepts either the 1-based number shown in the topic list or the exact sleepcast title. For example, these select the same item when item 116 is `Treehouse`:
+For example, these select the same item when item 116 is `Treehouse`:
 
 ```bash
 python Download_Audio.py --location sleep --topic-id 41 --item 116
@@ -189,8 +198,7 @@ Options:
 
 * `--location` → `SLEEP`, `MEDITATE`, or `FOCUS`; location names are case-insensitive
 * `--topic-id 41` → select the cached Sleepcasts topic
-* `--item 116` → select one cached sleepcast by its 1-based number or title; `--title` is retained as an alias
-* `--sleepcast` → enable v3 Sleepcast mode
+* `--item 116` → select one cached sleepcast by its 1-based number or title in quotes; `--title` is retained as an alias
 * `--date YYYY-MM-DD` → override the playback date (default: today); `--sleep-date` is an alias
 * `--all-tracks` → download VOICE + AMBIENCE + MIXED; `--include-split` is an alias
 * `--mixed-only` → download only the Mixed track (default)
@@ -208,7 +216,7 @@ Large Sleepcast files (≈50MB each) show a progress bar while downloading.
 
 ---
 
-## 🔄 Daily Workflow
+## Automation Workflow
 
 1. **Refresh login** – run `Browser_Login.py` once daily
 2. **Update catalogs** – run `Headripper.py` for your locations
@@ -216,7 +224,7 @@ Large Sleepcast files (≈50MB each) show a progress bar while downloading.
 
 ---
 
-## 📝 Notes
+## Notes
 
 * Sleepcast support is experimental but uses the same headers/auth as the mobile app.
 * Android headers are **required** for Sleepcasts.
@@ -225,13 +233,13 @@ Large Sleepcast files (≈50MB each) show a progress bar while downloading.
 
 ---
 
-## 🙌 Big Kudos
+## Big Kudos
 
 Special thanks to **komali2** — without his original Python script, this project wouldn’t exist.
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 Headripper does **not** promote piracy.
 Headspace makes valuable content that should be supported.
@@ -239,7 +247,7 @@ This project does not let you access anything you aren’t already entitled to.
 
 ---
 
-## 🔑 Bearer ID
+## Bearer ID
 
 Your **BearerID** is the authentication token Headspace uses to confirm your account.
 Headripper only uses it locally to make API requests — it is never sent anywhere except directly to Headspace’s servers.
