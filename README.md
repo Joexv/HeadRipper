@@ -162,7 +162,18 @@ python Download_Audio.py --location SLEEP --topic-id 42 --item 1
 python Download_Audio.py --location SLEEP --topic-id 42 --item "Item title"
 ```
 
-This works for regular audio such as sleep music, wind downs, and soundscapes as well as Sleepcasts. Omit `--sleepcast` for regular audio; it uses the standard variants API.
+This works for regular audio such as sleep music, wind downs, and soundscapes as well as Sleepcasts.
+
+Options:
+
+* `--location` → `SLEEP`, `MEDITATE`, or `FOCUS`; location names are case-insensitive
+* `--topic-id 41` → select the cached Sleepcasts topic
+* `--item 116` → select one cached sleepcast by its 1-based number or title in quotes; `--title` is retained as an alias
+* `--date YYYY-MM-DD` → override the playback date (default: today); `--sleep-date` is an alias
+* `--all-tracks` → download VOICE + AMBIENCE + MIXED; `--include-split` is an alias
+* `--mixed-only` → download only the Mixed track (default)
+* `--variant manual` → choose one returned audio variant interactively
+
 
 ---
 
@@ -191,18 +202,6 @@ Title matching is case-insensitive. The command downloads the Mixed track by def
 ```bash
 python Download_Audio.py
 ```
-
-Choose `SLEEP`, the `Sleepcasts` topic (topic id `41`), and then the sleepcast you want.
-
-Options:
-
-* `--location` → `SLEEP`, `MEDITATE`, or `FOCUS`; location names are case-insensitive
-* `--topic-id 41` → select the cached Sleepcasts topic
-* `--item 116` → select one cached sleepcast by its 1-based number or title in quotes; `--title` is retained as an alias
-* `--date YYYY-MM-DD` → override the playback date (default: today); `--sleep-date` is an alias
-* `--all-tracks` → download VOICE + AMBIENCE + MIXED; `--include-split` is an alias
-* `--mixed-only` → download only the Mixed track (default)
-* `--variant manual` → choose one returned audio variant interactively
 
 Example outputs:
 
